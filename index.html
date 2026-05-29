@@ -1,19 +1,200 @@
 <!DOCTYPE html>
-<html><head><meta charset="utf-8"><title>Files</title></head>
-<body><h2>Files</h2><ul>
-<li><a href="2026-05-20-tg-digest.html">2026-05-20-tg-digest.html</a></li>
-<li><a href="2026-05-21-tg-digest.html">2026-05-21-tg-digest.html</a></li>
-<li><a href="20260512-Slides-夙愿学长：半个月，烧了500美金，我终于把OpenClaw折腾成了真干活的AI员工.html">20260512-Slides-夙愿学长：半个月，烧了500美金，我终于把OpenClaw折腾成了真干活的AI员工.html</a></li>
-<li><a href="20260513-Slides-欧洲流量劫持法规调研.html">20260513-Slides-欧洲流量劫持法规调研.html</a></li>
-<li><a href="20260515-html-anything安装方案.html">20260515-html-anything安装方案.html</a></li>
-<li><a href="20260518-docs-page-html-anything安装方案.html">20260518-docs-page-html-anything安装方案.html</a></li>
-<li><a href="20260522-tg-digest.html">20260522-tg-digest.html</a></li>
-<li><a href="20260523-tg-digest.html">20260523-tg-digest.html</a></li>
-<li><a href="20260524-tg-digest.html">20260524-tg-digest.html</a></li>
-<li><a href="20260525-tg-digest.html">20260525-tg-digest.html</a></li>
-<li><a href="20260526-card-xiaohongshu-nexus-reading-notes.html">20260526-card-xiaohongshu-nexus-reading-notes.html</a></li>
-<li><a href="20260526-tg-digest.html">20260526-tg-digest.html</a></li>
-<li><a href="20260527-tg-digest.html">20260527-tg-digest.html</a></li>
-<li><a href="20260528-Slides-Meta-Reels-Creative-Playbook-精华总结.html">20260528-Slides-Meta-Reels-Creative-Playbook-精华总结.html</a></li>
-<li><a href="20260528-tg-digest.html">20260528-tg-digest.html</a></li>
-</ul></body></html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>QB Docs</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans SC", sans-serif;
+  background: #0f1117;
+  color: #e4e4e7;
+  min-height: 100vh;
+  padding: 0;
+}
+.header {
+  background: linear-gradient(135deg, #1a1b2e 0%, #16213e 100%);
+  border-bottom: 1px solid #2a2d3e;
+  padding: 2.5rem 2rem 2rem;
+  text-align: center;
+}
+.header h1 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #f0f0f0;
+  margin-bottom: 0.4rem;
+  letter-spacing: -0.02em;
+}
+.header .tagline {
+  font-size: 0.9rem;
+  color: #8b8fa3;
+}
+.header .stats {
+  margin-top: 0.8rem;
+  font-size: 0.8rem;
+  color: #6b7080;
+}
+.search-box {
+  max-width: 600px;
+  margin: 1.5rem auto 0;
+  position: relative;
+}
+.search-box input {
+  width: 100%;
+  padding: 0.7rem 1rem 0.7rem 2.4rem;
+  border-radius: 8px;
+  border: 1px solid #2a2d3e;
+  background: #1a1b26;
+  color: #e4e4e7;
+  font-size: 0.9rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.search-box input:focus {
+  border-color: #4f6df5;
+}
+.search-box::before {
+  content: "🔍";
+  position: absolute;
+  left: 0.8rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.85rem;
+}
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem 3rem;
+}
+.section {
+  margin-bottom: 2.5rem;
+}
+.section-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #c8cad0;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid #1e2030;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.section-title .count {
+  font-size: 0.75rem;
+  color: #6b7080;
+  background: #1e2030;
+  padding: 0.15rem 0.5rem;
+  border-radius: 10px;
+}
+.items {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.75rem 1rem;
+  background: #16171f;
+  border: 1px solid #1e2030;
+  border-radius: 8px;
+  text-decoration: none;
+  color: #e4e4e7;
+  transition: background 0.15s, border-color 0.15s;
+}
+.item:hover {
+  background: #1c1d2b;
+  border-color: #3a3d52;
+}
+.item .date {
+  font-size: 0.78rem;
+  color: #6b7080;
+  white-space: nowrap;
+  min-width: 5.5rem;
+}
+.item .title {
+  font-size: 0.88rem;
+  color: #d1d5e0;
+  word-break: break-all;
+}
+.empty {
+  color: #4a4d5e;
+  font-size: 0.85rem;
+  padding: 1rem;
+}
+.footer {
+  text-align: center;
+  padding: 2rem;
+  color: #3a3d4e;
+  font-size: 0.75rem;
+}
+@media (max-width: 600px) {
+  .header { padding: 1.5rem 1rem; }
+  .header h1 { font-size: 1.4rem; }
+  .container { padding: 1.5rem 1rem; }
+  .item { padding: 0.6rem 0.8rem; gap: 0.6rem; }
+  .item .date { min-width: 4.5rem; font-size: 0.72rem; }
+}
+</style>
+</head>
+<body>
+<div class="header">
+  <h1>📄 QB Docs</h1>
+  <p class="tagline">AI 产出文档归档站</p>
+  <p class="stats">15 份文档</p>
+  <div class="search-box">
+    <input type="text" id="search" placeholder="搜索文档..." autocomplete="off">
+  </div>
+</div>
+<div class="container">
+  <div class="section" data-cat="digest">
+    <div class="section-title">📰 TG 日报 <span class="count">9</span></div>
+    <div class="items">
+      <a href="20260528-tg-digest.html" class="item" target="_blank" rel="noopener"><span class="date">2026-05-28</span><span class="title">tg-digest</span></a>
+<a href="20260527-tg-digest.html" class="item" target="_blank" rel="noopener"><span class="date">2026-05-27</span><span class="title">tg-digest</span></a>
+<a href="20260526-tg-digest.html" class="item" target="_blank" rel="noopener"><span class="date">2026-05-26</span><span class="title">tg-digest</span></a>
+<a href="20260525-tg-digest.html" class="item" target="_blank" rel="noopener"><span class="date">2026-05-25</span><span class="title">tg-digest</span></a>
+<a href="20260524-tg-digest.html" class="item" target="_blank" rel="noopener"><span class="date">2026-05-24</span><span class="title">tg-digest</span></a>
+<a href="20260523-tg-digest.html" class="item" target="_blank" rel="noopener"><span class="date">2026-05-23</span><span class="title">tg-digest</span></a>
+<a href="20260522-tg-digest.html" class="item" target="_blank" rel="noopener"><span class="date">2026-05-22</span><span class="title">tg-digest</span></a>
+<a href="2026-05-21-tg-digest.html" class="item" target="_blank" rel="noopener"><span class="date">2026-05-21</span><span class="title">tg-digest</span></a>
+<a href="2026-05-20-tg-digest.html" class="item" target="_blank" rel="noopener"><span class="date">2026-05-20</span><span class="title">tg-digest</span></a>
+    </div>
+  </div>
+  <div class="section" data-cat="slides">
+    <div class="section-title">📑 笔记 Slides <span class="count">3</span></div>
+    <div class="items">
+      <a href="20260528-Slides-Meta-Reels-Creative-Playbook-精华总结.html" class="item" target="_blank" rel="noopener"><span class="date">2026-05-28</span><span class="title">Slides-Meta-Reels-Creative-Playbook-精华总结</span></a>
+<a href="20260513-Slides-欧洲流量劫持法规调研.html" class="item" target="_blank" rel="noopener"><span class="date">2026-05-13</span><span class="title">Slides-欧洲流量劫持法规调研</span></a>
+<a href="20260512-Slides-夙愿学长：半个月，烧了500美金，我终于把OpenClaw折腾成了真干活的AI员工.html" class="item" target="_blank" rel="noopener"><span class="date">2026-05-12</span><span class="title">Slides-夙愿学长：半个月，烧了500美金，我终于把OpenClaw折腾成了真干活的AI员工</span></a>
+    </div>
+  </div>
+  <div class="section" data-cat="other">
+    <div class="section-title">📄 其他文档 <span class="count">3</span></div>
+    <div class="items">
+      <a href="20260526-card-xiaohongshu-nexus-reading-notes.html" class="item" target="_blank" rel="noopener"><span class="date">2026-05-26</span><span class="title">card-xiaohongshu-nexus-reading-notes</span></a>
+<a href="20260518-docs-page-html-anything安装方案.html" class="item" target="_blank" rel="noopener"><span class="date">2026-05-18</span><span class="title">docs-page-html-anything安装方案</span></a>
+<a href="20260515-html-anything安装方案.html" class="item" target="_blank" rel="noopener"><span class="date">2026-05-15</span><span class="title">html-anything安装方案</span></a>
+    </div>
+  </div>
+</div>
+<div class="footer">Powered by OpenClaw · Auto-generated</div>
+<script>
+document.getElementById('search').addEventListener('input', function() {
+  const q = this.value.toLowerCase();
+  document.querySelectorAll('.item').forEach(el => {
+    const text = el.textContent.toLowerCase();
+    el.style.display = text.includes(q) ? '' : 'none';
+  });
+  document.querySelectorAll('.section').forEach(sec => {
+    const visible = sec.querySelectorAll('.item[style=""], .item:not([style])');
+    const hasVisible = Array.from(sec.querySelectorAll('.item')).some(el => el.style.display !== 'none');
+    sec.style.display = hasVisible || !q ? '' : 'none';
+  });
+});
+</script>
+</body>
+</html>

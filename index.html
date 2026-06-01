@@ -1,22 +1,472 @@
 <!DOCTYPE html>
-<html><head><meta charset="utf-8"><title>Files</title></head>
-<body><h2>Files</h2><ul>
-<li><a href="2026-05-20-tg-digest.html">2026-05-20-tg-digest.html</a></li>
-<li><a href="2026-05-21-tg-digest.html">2026-05-21-tg-digest.html</a></li>
-<li><a href="20260512-Slides-夙愿学长：半个月，烧了500美金，我终于把OpenClaw折腾成了真干活的AI员工.html">20260512-Slides-夙愿学长：半个月，烧了500美金，我终于把OpenClaw折腾成了真干活的AI员工.html</a></li>
-<li><a href="20260513-Slides-欧洲流量劫持法规调研.html">20260513-Slides-欧洲流量劫持法规调研.html</a></li>
-<li><a href="20260515-html-anything安装方案.html">20260515-html-anything安装方案.html</a></li>
-<li><a href="20260518-docs-page-html-anything安装方案.html">20260518-docs-page-html-anything安装方案.html</a></li>
-<li><a href="20260522-tg-digest.html">20260522-tg-digest.html</a></li>
-<li><a href="20260523-tg-digest.html">20260523-tg-digest.html</a></li>
-<li><a href="20260524-tg-digest.html">20260524-tg-digest.html</a></li>
-<li><a href="20260525-tg-digest.html">20260525-tg-digest.html</a></li>
-<li><a href="20260526-card-xiaohongshu-nexus-reading-notes.html">20260526-card-xiaohongshu-nexus-reading-notes.html</a></li>
-<li><a href="20260526-tg-digest.html">20260526-tg-digest.html</a></li>
-<li><a href="20260527-tg-digest.html">20260527-tg-digest.html</a></li>
-<li><a href="20260528-Slides-Meta-Reels-Creative-Playbook-精华总结.html">20260528-Slides-Meta-Reels-Creative-Playbook-精华总结.html</a></li>
-<li><a href="20260528-tg-digest.html">20260528-tg-digest.html</a></li>
-<li><a href="20260529-tg-digest.html">20260529-tg-digest.html</a></li>
-<li><a href="20260530-tg-digest.html">20260530-tg-digest.html</a></li>
-<li><a href="20260531-tg-digest.html">20260531-tg-digest.html</a></li>
-</ul></body></html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>QB Docs</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { height: 100%; overflow: hidden; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Noto Sans SC", sans-serif;
+  background: #f7f8fa;
+  color: #1f2329;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+/* ── Top bar ── */
+.topbar {
+  height: 52px;
+  background: #fff;
+  border-bottom: 1px solid #e5e6eb;
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  flex-shrink: 0;
+  gap: 16px;
+}
+.topbar .logo {
+  font-size: 15px;
+  font-weight: 600;
+  color: #1f2329;
+  white-space: nowrap;
+}
+.topbar .search-box {
+  flex: 1;
+  max-width: 360px;
+  position: relative;
+}
+.topbar .search-box input {
+  width: 100%;
+  padding: 6px 12px 6px 32px;
+  border: 1px solid #dee0e3;
+  border-radius: 6px;
+  font-size: 13px;
+  color: #1f2329;
+  background: #f7f8fa;
+  outline: none;
+  transition: border-color .2s, background .2s;
+}
+.topbar .search-box input:focus {
+  border-color: #3370ff;
+  background: #fff;
+}
+.topbar .search-box::before {
+  content: "🔍";
+  position: absolute;
+  left: 9px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 12px;
+  pointer-events: none;
+}
+.topbar .stats {
+  font-size: 12px;
+  color: #8f959e;
+  white-space: nowrap;
+}
+
+/* ── Sidebar toggle ── */
+.sidebar-toggle {
+  width: 28px;
+  height: 28px;
+  border: none;
+  background: #f2f3f5;
+  border-radius: 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  color: #646a73;
+  transition: background .15s;
+  flex-shrink: 0;
+}
+.sidebar-toggle:hover {
+  background: #e5e6eb;
+}
+
+/* ── Layout ── */
+.main {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+/* ── Sidebar ── */
+.sidebar {
+  width: 260px;
+  min-width: 160px;
+  background: #fff;
+  overflow-y: auto;
+  padding: 12px 0;
+  flex-shrink: 0;
+  transition: width .25s, min-width .25s, padding .25s, opacity .2s;
+}
+.sidebar.hidden {
+  width: 0 !important;
+  min-width: 0 !important;
+  padding: 0;
+  overflow: hidden;
+  opacity: 0;
+}
+.sidebar.resizing {
+  transition: none;
+  user-select: none;
+}
+
+/* Resize handle: thin line between sidebar and content */
+.resize-handle {
+  width: 1px;
+  margin: 0;
+  cursor: col-resize;
+  background: #e5e6eb;
+  transition: background .15s;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 10;
+  padding: 0 2px;
+  background-clip: content-box;
+}
+.resize-handle:hover,
+.resize-handle.active {
+  background: #3370ff;
+  background-clip: content-box;
+}
+
+/* Overlay to prevent iframe from stealing mouse events during resize */
+.resize-overlay {
+  display: none;
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  z-index: 9999;
+  cursor: col-resize;
+}
+.nav-section {
+  margin-bottom: 4px;
+}
+.nav-header {
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #646a73;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  user-select: none;
+  transition: color .15s;
+}
+.nav-header:hover {
+  color: #1f2329;
+}
+.nav-arrow {
+  font-size: 10px;
+  transition: transform .2s;
+  display: inline-block;
+  width: 14px;
+}
+.nav-section.collapsed .nav-arrow {
+  transform: rotate(0deg);
+}
+.nav-section:not(.collapsed) .nav-arrow {
+  transform: rotate(90deg);
+}
+.nav-section.collapsed .nav-items {
+  display: none;
+}
+.nav-count {
+  font-size: 12px;
+  color: #8f959e;
+  font-weight: 400;
+  margin-left: auto;
+  background: #f2f3f5;
+  padding: 1px 6px;
+  border-radius: 8px;
+}
+
+.nav-items {
+  padding: 0;
+}
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 16px 7px 34px;
+  font-size: 14px;
+  color: #4e5969;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background .12s, color .12s;
+  line-height: 1.4;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  position: relative;
+}
+.nav-item:hover {
+  background: #f2f3f5;
+  color: #1f2329;
+}
+.nav-item.active {
+  background: #e8f3ff;
+  color: #3370ff;
+  font-weight: 500;
+}
+.item-date {
+  font-size: 12px;
+  color: #8f959e;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.item-title {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.ext-icon {
+  font-size: 11px;
+  color: #8f959e;
+  flex-shrink: 0;
+}
+.nav-empty {
+  padding: 8px 16px 8px 34px;
+  font-size: 12px;
+  color: #c9cdd4;
+}
+
+/* ── Content area ── */
+.content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  overflow: hidden;
+}
+.content iframe {
+  flex: 1;
+  border: none;
+  width: 100%;
+  height: 100%;
+}
+.welcome {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #c9cdd4;
+  gap: 12px;
+}
+.welcome .icon {
+  font-size: 48px;
+}
+.welcome .text {
+  font-size: 14px;
+}
+
+/* ── Mobile ── */
+@media (max-width: 768px) {
+  .sidebar {
+    width: 220px;
+    min-width: 220px;
+  }
+  .topbar .search-box {
+    max-width: 200px;
+  }
+}
+@media (max-width: 540px) {
+  .sidebar {
+    position: fixed;
+    left: 0; top: 52px; bottom: 0;
+    z-index: 100;
+    transform: translateX(-100%);
+    transition: transform .25s;
+    box-shadow: 2px 0 8px rgba(0,0,0,.08);
+  }
+  .sidebar.open {
+    transform: translateX(0);
+  }
+  .topbar .menu-btn {
+    display: block;
+  }
+}
+</style>
+</head>
+<body>
+<div class="topbar">
+  <button class="sidebar-toggle" id="sidebarToggle" onclick="toggleSidebar()" title="展开/收起侧边栏">☰</button>
+  <div class="logo">📄 QB Docs</div>
+  <div class="search-box">
+    <input type="text" id="search" placeholder="搜索文档..." autocomplete="off">
+  </div>
+  <div class="stats">18 份文档</div>
+</div>
+<div class="main">
+  <div class="sidebar" id="sidebar">
+    
+    <div class="nav-section">
+      <div class="nav-header" onclick="toggleSection(this)">
+        <span class="nav-arrow">▸</span> 📰 TG 日报 <span class="nav-count">12</span>
+      </div>
+      <div class="nav-items">
+        <a href="20260531-tg-digest.html" class="nav-item" data-file="20260531-tg-digest.html" data-title="2026-05-31 tg-digest" onclick='loadDoc("20260531-tg-digest.html",this);return false;'><span class="item-date">2026-05-31</span><span class="item-title">tg-digest</span></a>
+<a href="20260530-tg-digest.html" class="nav-item" data-file="20260530-tg-digest.html" data-title="2026-05-30 tg-digest" onclick='loadDoc("20260530-tg-digest.html",this);return false;'><span class="item-date">2026-05-30</span><span class="item-title">tg-digest</span></a>
+<a href="20260529-tg-digest.html" class="nav-item" data-file="20260529-tg-digest.html" data-title="2026-05-29 tg-digest" onclick='loadDoc("20260529-tg-digest.html",this);return false;'><span class="item-date">2026-05-29</span><span class="item-title">tg-digest</span></a>
+<a href="20260528-tg-digest.html" class="nav-item" data-file="20260528-tg-digest.html" data-title="2026-05-28 tg-digest" onclick='loadDoc("20260528-tg-digest.html",this);return false;'><span class="item-date">2026-05-28</span><span class="item-title">tg-digest</span></a>
+<a href="20260527-tg-digest.html" class="nav-item" data-file="20260527-tg-digest.html" data-title="2026-05-27 tg-digest" onclick='loadDoc("20260527-tg-digest.html",this);return false;'><span class="item-date">2026-05-27</span><span class="item-title">tg-digest</span></a>
+<a href="20260526-tg-digest.html" class="nav-item" data-file="20260526-tg-digest.html" data-title="2026-05-26 tg-digest" onclick='loadDoc("20260526-tg-digest.html",this);return false;'><span class="item-date">2026-05-26</span><span class="item-title">tg-digest</span></a>
+<a href="20260525-tg-digest.html" class="nav-item" data-file="20260525-tg-digest.html" data-title="2026-05-25 tg-digest" onclick='loadDoc("20260525-tg-digest.html",this);return false;'><span class="item-date">2026-05-25</span><span class="item-title">tg-digest</span></a>
+<a href="20260524-tg-digest.html" class="nav-item" data-file="20260524-tg-digest.html" data-title="2026-05-24 tg-digest" onclick='loadDoc("20260524-tg-digest.html",this);return false;'><span class="item-date">2026-05-24</span><span class="item-title">tg-digest</span></a>
+<a href="20260523-tg-digest.html" class="nav-item" data-file="20260523-tg-digest.html" data-title="2026-05-23 tg-digest" onclick='loadDoc("20260523-tg-digest.html",this);return false;'><span class="item-date">2026-05-23</span><span class="item-title">tg-digest</span></a>
+<a href="20260522-tg-digest.html" class="nav-item" data-file="20260522-tg-digest.html" data-title="2026-05-22 tg-digest" onclick='loadDoc("20260522-tg-digest.html",this);return false;'><span class="item-date">2026-05-22</span><span class="item-title">tg-digest</span></a>
+<a href="2026-05-21-tg-digest.html" class="nav-item" data-file="2026-05-21-tg-digest.html" data-title="2026-05-21 tg-digest" onclick='loadDoc("2026-05-21-tg-digest.html",this);return false;'><span class="item-date">2026-05-21</span><span class="item-title">tg-digest</span></a>
+<a href="2026-05-20-tg-digest.html" class="nav-item" data-file="2026-05-20-tg-digest.html" data-title="2026-05-20 tg-digest" onclick='loadDoc("2026-05-20-tg-digest.html",this);return false;'><span class="item-date">2026-05-20</span><span class="item-title">tg-digest</span></a>
+      </div>
+    </div>
+
+    <div class="nav-section">
+      <div class="nav-header" onclick="toggleSection(this)">
+        <span class="nav-arrow">▸</span> 📑 笔记 Slides <span class="nav-count">3</span>
+      </div>
+      <div class="nav-items">
+        <a href="20260528-Slides-Meta-Reels-Creative-Playbook-精华总结.html" class="nav-item" data-file="20260528-Slides-Meta-Reels-Creative-Playbook-精华总结.html" data-title="2026-05-28 Slides-Meta-Reels-Creative-Playbook-精华总结" onclick='window.open("20260528-Slides-Meta-Reels-Creative-Playbook-精华总结.html","_blank");return false;'><span class="item-date">2026-05-28</span><span class="item-title">Slides-Meta-Reels-Creative-Playbook-精华总结</span> <span class="ext-icon" title="全屏打开">↗</span></a>
+<a href="20260513-Slides-欧洲流量劫持法规调研.html" class="nav-item" data-file="20260513-Slides-欧洲流量劫持法规调研.html" data-title="2026-05-13 Slides-欧洲流量劫持法规调研" onclick='window.open("20260513-Slides-欧洲流量劫持法规调研.html","_blank");return false;'><span class="item-date">2026-05-13</span><span class="item-title">Slides-欧洲流量劫持法规调研</span> <span class="ext-icon" title="全屏打开">↗</span></a>
+<a href="20260512-Slides-夙愿学长：半个月，烧了500美金，我终于把OpenClaw折腾成了真干活的AI员工.html" class="nav-item" data-file="20260512-Slides-夙愿学长：半个月，烧了500美金，我终于把OpenClaw折腾成了真干活的AI员工.html" data-title="2026-05-12 Slides-夙愿学长：半个月，烧了500美金，我终于把OpenClaw折腾成了真干活的AI员工" onclick='window.open("20260512-Slides-夙愿学长：半个月，烧了500美金，我终于把OpenClaw折腾成了真干活的AI员工.html","_blank");return false;'><span class="item-date">2026-05-12</span><span class="item-title">Slides-夙愿学长：半个月，烧了500美金，我终于把OpenClaw折腾成了真干活的AI员工</span> <span class="ext-icon" title="全屏打开">↗</span></a>
+      </div>
+    </div>
+
+    <div class="nav-section">
+      <div class="nav-header" onclick="toggleSection(this)">
+        <span class="nav-arrow">▸</span> 📄 其他文档 <span class="nav-count">3</span>
+      </div>
+      <div class="nav-items">
+        <a href="20260526-card-xiaohongshu-nexus-reading-notes.html" class="nav-item" data-file="20260526-card-xiaohongshu-nexus-reading-notes.html" data-title="2026-05-26 card-xiaohongshu-nexus-reading-notes" onclick='loadDoc("20260526-card-xiaohongshu-nexus-reading-notes.html",this);return false;'><span class="item-date">2026-05-26</span><span class="item-title">card-xiaohongshu-nexus-reading-notes</span></a>
+<a href="20260518-docs-page-html-anything安装方案.html" class="nav-item" data-file="20260518-docs-page-html-anything安装方案.html" data-title="2026-05-18 docs-page-html-anything安装方案" onclick='loadDoc("20260518-docs-page-html-anything安装方案.html",this);return false;'><span class="item-date">2026-05-18</span><span class="item-title">docs-page-html-anything安装方案</span></a>
+<a href="20260515-html-anything安装方案.html" class="nav-item" data-file="20260515-html-anything安装方案.html" data-title="2026-05-15 html-anything安装方案" onclick='loadDoc("20260515-html-anything安装方案.html",this);return false;'><span class="item-date">2026-05-15</span><span class="item-title">html-anything安装方案</span></a>
+      </div>
+    </div>
+  </div>
+  <div class="resize-handle" id="resizeHandle"></div>
+  <div class="content" id="content">
+    <div class="welcome" id="welcome">
+      <div class="icon">📂</div>
+      <div class="text">从左侧选择一篇文档开始阅读</div>
+    </div>
+  </div>
+</div>
+<div class="resize-overlay" id="resizeOverlay"></div>
+<script>
+function toggleSidebar() {
+  const sidebar = document.getElementById('sidebar');
+  const handle = document.getElementById('resizeHandle');
+  sidebar.classList.toggle('hidden');
+  if (sidebar.classList.contains('hidden')) {
+    sidebar.style.width = '';
+    sidebar.style.minWidth = '';
+    handle.style.display = 'none';
+  } else {
+    handle.style.display = '';
+  }
+  const btn = document.getElementById('sidebarToggle');
+  btn.title = sidebar.classList.contains('hidden') ? '展开侧边栏' : '收起侧边栏';
+}
+
+function loadDoc(url, el) {
+  // Remove old active
+  document.querySelectorAll('.nav-item.active').forEach(e => e.classList.remove('active'));
+  if (el) el.classList.add('active');
+  const content = document.getElementById('content');
+  // Remove welcome
+  const w = document.getElementById('welcome');
+  if (w) w.remove();
+  // Remove old iframe
+  const old = content.querySelector('iframe');
+  if (old) old.remove();
+  // Create iframe
+  const iframe = document.createElement('iframe');
+  iframe.src = url;
+  iframe.setAttribute('sandbox', 'allow-same-origin allow-scripts allow-popups');
+  content.appendChild(iframe);
+}
+
+function toggleSection(header) {
+  const section = header.parentElement;
+  section.classList.toggle('collapsed');
+}
+
+// Search
+document.getElementById('search').addEventListener('input', function() {
+  const q = this.value.toLowerCase();
+  document.querySelectorAll('.nav-item').forEach(el => {
+    const text = el.textContent.toLowerCase();
+    el.style.display = text.includes(q) ? '' : 'none';
+  });
+  // Show/hide sections based on visible items
+  document.querySelectorAll('.nav-section').forEach(sec => {
+    const hasVisible = Array.from(sec.querySelectorAll('.nav-item')).some(el => el.style.display !== 'none');
+    sec.style.display = hasVisible || !q ? '' : 'none';
+    // Auto expand when searching
+    if (q && hasVisible) sec.classList.remove('collapsed');
+  });
+});
+
+// Sidebar resize
+(function() {
+  const sidebar = document.getElementById('sidebar');
+  const handle = document.getElementById('resizeHandle');
+  const overlay = document.getElementById('resizeOverlay');
+  let startX, startW;
+  handle.addEventListener('mousedown', function(e) {
+    e.preventDefault();
+    startX = e.clientX;
+    startW = sidebar.offsetWidth;
+    sidebar.classList.add('resizing');
+    handle.classList.add('active');
+    overlay.style.display = 'block';
+    document.addEventListener('mousemove', onMove);
+    document.addEventListener('mouseup', onUp);
+  });
+  function onMove(e) {
+    const diff = e.clientX - startX;
+    const newW = Math.max(160, Math.min(500, startW + diff));
+    sidebar.style.width = newW + 'px';
+    sidebar.style.minWidth = newW + 'px';
+  }
+  function onUp() {
+    sidebar.classList.remove('resizing');
+    handle.classList.remove('active');
+    overlay.style.display = 'none';
+    document.removeEventListener('mousemove', onMove);
+    document.removeEventListener('mouseup', onUp);
+  }
+})();
+
+// Tooltip: only show title when text is truncated
+(function() {
+  document.querySelectorAll('.nav-item').forEach(el => {
+    el.addEventListener('mouseenter', function() {
+      const titleSpan = this.querySelector('.item-title');
+      if (titleSpan && titleSpan.scrollWidth > titleSpan.clientWidth) {
+        this.setAttribute('title', this.getAttribute('data-title') || '');
+      } else {
+        this.removeAttribute('title');
+      }
+    });
+  });
+})();
+
+// Auto-load first non-slides item
+(function() {
+  const first = document.querySelector('.nav-section:not([data-cat="slides"]) .nav-item');
+  if (first) {
+    const url = first.getAttribute('data-file');
+    if (url) loadDoc(url, first);
+  }
+})();
+</script>
+</body>
+</html>

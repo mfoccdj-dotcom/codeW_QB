@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>TG 频道日报</title>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    background: #060814;
+    color: #e8eaf0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    font-size: 15px;
+    line-height: 1.7;
+    min-height: 100vh;
+    display: flex; justify-content: center;
+}
+
+a { color: #6ea0ff; text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+.main-wrap {
+    width: 100%;
+    max-width: 860px;
+    padding: 48px 40px 80px;
+}
+
+.hero {
+    padding-bottom: 36px;
+    margin-bottom: 36px;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+}
+.hero-vol { font-size: 11px; font-weight: 700; letter-spacing: 0.2em; color: #6ea0ff; margin-bottom: 10px; }
+.hero-title { font-size: 38px; font-weight: 800; line-height: 1.15; color: #fff; margin-bottom: 10px; }
+.hero-date { font-size: 13px; color: rgba(255,255,255,0.4); margin-bottom: 16px; }
+.hero-stats { display: flex; gap: 28px; }
+.stat-item { display: flex; flex-direction: column; gap: 2px; }
+.stat-num { font-size: 22px; font-weight: 700; color: #fff; }
+.stat-label { font-size: 11px; color: rgba(255,255,255,0.35); letter-spacing: 0.08em; text-transform: uppercase; }
+
+.section { margin-bottom: 40px; }
+.section-head {
+    display: flex; align-items: baseline; gap: 16px;
+    margin-bottom: 20px; padding-bottom: 12px;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.section-num { font-size: 28px; font-weight: 800; color: rgba(255,255,255,0.07); line-height: 1; }
+.section-title { font-size: 17px; font-weight: 700; color: #fff; }
+.section-count {
+    margin-left: auto; font-size: 11px; font-weight: 600; color: #6ea0ff;
+    background: rgba(110,160,255,0.12); padding: 2px 8px; border-radius: 20px;
+}
+
+.card {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 12px; padding: 18px 22px; margin-bottom: 12px;
+    transition: border-color 0.2s, background 0.2s;
+}
+.card:hover { border-color: rgba(110,160,255,0.3); background: rgba(110,160,255,0.04); }
+
+.card-meta { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; }
+.channel-tag {
+    font-size: 12px; font-weight: 600; color: #fff;
+    background: rgba(110,160,255,0.25); padding: 2px 8px; border-radius: 20px; white-space: nowrap;
+}
+.time-tag { font-size: 12px; color: rgba(255,255,255,0.35); }
+
+.card-title {
+    font-size: 15px; font-weight: 700; color: #fff;
+    margin-bottom: 8px; line-height: 1.5;
+}
+.card-title a { color: inherit; }
+.card-title a:hover { color: #6ea0ff; text-decoration: none; }
+
+.card-summary {
+    font-size: 14px; color: rgba(255,255,255,0.6);
+    line-height: 1.8;
+}
+.card-summary p { margin-bottom: 6px; }
+.card-summary p:last-child { margin-bottom: 0; }
+
+.card-footer {
+    margin-top: 10px; display: flex; align-items: center;
+    gap: 12px; flex-wrap: wrap;
+}
+.source-link { font-size: 12px; color: rgba(255,255,255,0.35); }
+.source-link::before { content: "🔗 "; }
+.channel-links { margin-left: auto; font-size: 11px; color: rgba(255,255,255,0.25); }
+.channel-links a { color: rgba(255,255,255,0.3); margin-right: 6px; }
+.channel-links a:hover { color: #6ea0ff; }
+
+.brief-text { font-size: 15px; color: rgba(255,255,255,0.75); line-height: 1.7; }
+
+pre { background: rgba(0,0,0,0.4); border-radius: 8px; padding: 16px; overflow-x: auto; font-size: 13px; }
+code { font-family: "SF Mono", Consolas, monospace; font-size: 0.88em; }
+p code { background: rgba(110,160,255,0.1); color: #9ec5ff; padding: 1px 6px; border-radius: 4px; }
+
+.footer {
+    text-align: center; font-size: 12px; color: rgba(255,255,255,0.2);
+    padding: 30px 0 20px; border-top: 1px solid rgba(255,255,255,0.05); margin-top: 20px;
+}
+
+@media (max-width: 768px) {
+    .main-wrap { padding: 28px 20px 60px; }
+    .hero-title { font-size: 26px; }
+}
+</style>
+</head>
+<body>
+
+<div class="main-wrap">
+    <div class="hero">
+        <div class="hero-vol">VOL.20260506</div>
+        <h1 class="hero-title">TG 频道日报</h1>
+        <div class="hero-date">2026年05月06日 · 星期三 · 1 个频道 · 7 条内容</div>
+        <div class="hero-stats">
+            <div class="stat-item"><span class="stat-num">7</span><span class="stat-label">条内容</span></div>
+            <div class="stat-item"><span class="stat-num">1</span><span class="stat-label">个频道</span></div>
+        </div>
+    </div>
+
+    <div class="section"><div class="section-head"><span class="section-num">01</span><span class="section-title">TG 频道精选</span><span class="section-count">7 条</span></div>
+<div class="card">
+  <div class="card-meta">
+    <span class="channel-tag">@yunying23</span>
+    <span class="time-tag">09:17</span>
+  </div>
+  <div class="card-title"><a href="https://t.me/yunying23/9584)" target="_blank">现在的AI赛道，像极了2000年的互联网泡沫前夜。</a></div>
+  <div class="card-summary"><p>定价模式乱。 标准乱。 交付乱。</p>
+<p>很多人焦虑，很多人在观望，在等一个“标准答案”。</p>
+<p>但是等标准答案出来，机会就跟你没关系了。</p>
+<p>2000 年时，所有人都在等“互联网该怎么玩”，</p>
+<p>结果是，</p>
+<p>腾讯、阿里、亚马逊已经跑出来了。</p>
+<p>今天的 AI 一样。</p>
+<p>还没定义的东西，才有高杠杆。</p>
+<p>越混乱的市场，越考验判断力和执行力。</p>
+<hr /></div>
+  <div class="card-footer"><a class="source-link" href="https://t.me/yunying23/9584)" target="_blank">查看原文</a><div class="channel-links"><a href="https://t.me/yunying23">出海赚美金</a><a href="https://t.me/meiriyishu">优质资源</a><a href="https://t.me/chunse1024/8467">优质信息</a><a href="https://t.me/inside1024">内幕消息</a><a href="https://t.me/yunying23/9584">查看原文</a></div></div>
+</div>
+<div class="card">
+  <div class="card-meta">
+    <span class="channel-tag">@yunying23</span>
+    <span class="time-tag">09:50</span>
+  </div>
+  <div class="card-title"><a href="https://t.me/yunying23/9585)" target="_blank">X上看到一哥们儿问了这个问题：nanobanana套壳站比起Google AI Studio有啥优势，比起同类网站有啥优势？</a></div>
+  <div class="card-summary"><p>其实很多个人的套壳站要从互联网公司的标准来看，ui、交互来看，严重不合格，我有个做产品交互做了十多年的朋友，还有一个果粉狂热份子在大厂工作了很多年的朋友，每次我给他们看一些大佬的套壳站，我说这些站赚了多少多少钱，我是很激动的，而他们眼力看到的是一堆毛病，比如这个配色、那个小bug等等问题。我可能会从这个站是怎么拿到流量的，转化效果如何这个角度去思考，而他们却是另外一套系统。</p>
+<p>其实不用看做站、做产品，就说现实生活中的情况，有很多生意，并不是能力强或者产品做得好就行，甚至说能力强、做得好在这里面起的作用不大。比如我之前有一次顺风车遇到一人，他做的是社区除老鼠害虫这类，而他每天最重要的活动就是混圈子、混关系。</p>
+<p>我感觉套壳站能触达到对应需求的用户，能低成本拿到流量，并且满足用户的需求是关键。如果哪天谷歌真的跟百度一样，把流量都导到自家的产品了，大部分的套壳站可能就很危险了。</p>
+<p>从结果上看，比如像 nano-banana.ai 这个站，从产品力、设计上可能根本没法与大公司的产品相比，这方面比起pollo.ai 这类产品差远了。但就这么一个站，每个月三四十万的uv。</p>
+<p>所以，每个人只能赚到自己认知范围内的钱。</p>
+<hr /></div>
+  <div class="card-footer"><a class="source-link" href="https://t.me/yunying23/9585)" target="_blank">查看原文</a><div class="channel-links"><a href="https://t.me/yunying23/9585">查看原文</a></div></div>
+</div>
+<div class="card">
+  <div class="card-meta">
+    <span class="channel-tag">@yunying23</span>
+    <span class="time-tag">11:23</span>
+  </div>
+  <div class="card-title"><a href="https://t.me/yunying23/9586)" target="_blank">做产品原型的时候试了下 Google 的 Stitch</a></div>
+  <div class="card-summary"><p>以前我做原型都是先画线框图，再找人设计，</p>
+<p>现在直接说一句就出来了。</p>
+<p>我跟它说：</p>
+<p>"做个语音记账 APP，说就能记账，</p>
+<p>要账单列表、数据统计、分类管理"</p>
+<p>两分钟，所有页面都出来了。</p>
+<p>虽然不是那种特别精细的设计，但做原型够用了。</p>
+<p>改东西也方便：</p>
+<p>改整体风格就直接说</p>
+<p>改局部就框起来</p>
+<p>或者用调色板调调颜色啥的</p>
+<p>有两个模式，一个快一个慢。</p>
+<p>慢的那个能上传手绘稿，它帮你转成正式界面。</p>
+<p>弄完之后能导代码，也能粘贴到 Figma。</p>
+<p>我现在基本就是用它快速搞个原型出来，</p>
+<p>然后把代码给 Cursor 继续写后端逻辑。</p>
+<p>不会设计的，用这个能省不少事。</p>
+<hr /></div>
+  <div class="card-footer"><a class="source-link" href="https://t.me/yunying23/9586)" target="_blank">查看原文</a><div class="channel-links"><a href="https://t.me/yunying23">出海赚美金</a><a href="https://t.me/meiriyishu">优质资源</a><a href="https://t.me/chunse1024/8467">优质信息</a><a href="https://t.me/inside1024">内幕消息</a><a href="https://t.me/yunying23/9586">查看原文</a></div></div>
+</div>
+<div class="card">
+  <div class="card-meta">
+    <span class="channel-tag">@yunying23</span>
+    <span class="time-tag">14:25</span>
+  </div>
+  <div class="card-title"><a href="https://t.me/yunying23/9588)" target="_blank">我越来越确定一件事：</a></div>
+  <div class="card-summary"><p>真正的成长，只发生在“干”的过程中。</p>
+<p>我遇到太多新手朋友问我：</p>
+<p>“我该学什么？”</p>
+<p>“能不能帮我列个学习计划？”</p>
+<p>我总是说：</p>
+<p>别浪费时间规划，先上场干。</p>
+<p>光看别人做，永远是幻觉。</p>
+<p>只有当你自己做，错误才变成反馈，反馈才变成成长。</p>
+<p>这也是费曼学习法的本质：</p>
+<p>“你能讲明白的，才是你真正学会的。”</p>
+<p>而要讲明白，前提是你先做过。</p>
+<hr /></div>
+  <div class="card-footer"><a class="source-link" href="https://t.me/yunying23/9588)" target="_blank">查看原文</a><div class="channel-links"><a href="https://t.me/yunying23">出海赚美金</a><a href="https://t.me/meiriyishu">优质资源</a><a href="https://t.me/chunse1024/8467">优质信息</a><a href="https://t.me/inside1024">内幕消息</a><a href="https://t.me/yunying23/9588">查看原文</a></div></div>
+</div>
+<div class="card">
+  <div class="card-meta">
+    <span class="channel-tag">@yunying23</span>
+    <span class="time-tag">16:29</span>
+  </div>
+  <div class="card-title"><a href="https://t.me/yunying23/9589)" target="_blank">“一台电脑=每天趟赚400元”</a></div>
+  <div class="card-summary"><p>东边不亮西边亮</p>
+<p>折腾才是最好的赚钱方式</p>
+<p>而我选择的是游戏打金</p>
+<p>因此暂时放弃了变现速度慢的OpenClaw（龙虾）</p>
+<p>直接开始成本收益分析</p>
+<ol>
+<li>资金成本</li>
+</ol>
+<p>1个月为期限</p>
+<p>6个账号 月卡/账号</p>
+<p>6*147=882</p>
+<p>（某宝 136）</p>
+<p>某个云服务器（香港） 34*2=68 （主要IP+转发 ）</p>
+<p>脚本160 多开 24</p>
+<p>合计=1134</p>
+<p>2.目前收益</p>
+<p>目前金币价格 1W=16元</p>
+<p>合计70W金币回本</p>
+<p>目前一天20W+</p>
+<p>预计3到4天回本</p>
+<p>每天300+能维持一个月吗？</p>
+<ol start="3">
+<li>时间成本</li>
+</ol>
+<p>外服，需要自己买服务搭转发socks5即可</p>
+<p>需要购买或者申请游戏账号以及月卡充值</p>
+<p>需要折腾多开和脚本</p>
+<p>因为我牛马上班 前后花费2天晚上 熬夜到2点</p>
+<p>除了过程繁琐，还需要解决各种小问</p>
+<p>主要是我现在电脑和脚本冲突，最后重装了系统</p>
+<p>大概12小时</p>
+<p>4.总结</p>
+<p>目前我用的是自己个人电脑，配置AMD5600X+显卡3600</p>
+<p>= 每天300+</p>
+<p>如果你机器多，比如是撸毛人那么可以无限复制，每天趟赚~</p>
+<p>这张图是我朋友的 他春节就开始搞了</p>
+<p>这2天一直折腾时间不够用</p>
+<p>又断签了</p>
+<hr /></div>
+  <div class="card-footer"><a class="source-link" href="https://t.me/yunying23/9589)" target="_blank">查看原文</a><div class="channel-links"><a href="https://t.me/yunying23">出海赚美金</a><a href="https://t.me/meiriyishu">优质资源</a><a href="https://t.me/chunse1024/8467">优质信息</a><a href="https://t.me/inside1024">内幕消息</a><a href="https://t.me/yunying23/9589">查看原文</a></div></div>
+</div>
+<div class="card">
+  <div class="card-meta">
+    <span class="channel-tag">@yunying23</span>
+    <span class="time-tag">18:19</span>
+  </div>
+  <div class="card-title"><a href="https://t.me/yunying23/9590)" target="_blank">刚去把创作者ID认证申请了，真的是秒过！</a></div>
+  <div class="card-summary"><ol>
+<li>
+<p>梯子设置到美国</p>
+</li>
+<li>
+<p>手机系统语言设置成英文</p>
+</li>
+<li>
+<p>进入认证页面，用身份证就可以直接认证通过了</p>
+</li>
+</ol>
+<p>认证通过后，在Strip里面，设置你的地址、绑定银行卡就行，地址我随便找了一个香港的酒店地址设置的，银行卡是香港的ZA 众安银行。</p>
+<p>接下来就是等待下次马斯克发钱了。</p>
+<hr /></div>
+  <div class="card-footer"><a class="source-link" href="https://t.me/yunying23/9590)" target="_blank">查看原文</a><div class="channel-links"><a href="https://t.me/yunying23">出海赚美金</a><a href="https://t.me/meiriyishu">优质资源</a><a href="https://t.me/chunse1024/8467">优质信息</a><a href="https://t.me/inside1024">内幕消息</a><a href="https://t.me/yunying23/9590">查看原文</a></div></div>
+</div>
+<div class="card">
+  <div class="card-meta">
+    <span class="channel-tag">@yunying23</span>
+    <span class="time-tag">22:16</span>
+  </div>
+  <div class="card-title"><a href="https://t.me/yunying23/9592)" target="_blank">什么叫尊重常识？</a></div>
+  <div class="card-summary"><p>看看美团王兴这段，大抵就明白了。</p>
+<p>“我们犯了很多错误，交了很多学费才知道这个世界没有神，只有一些很朴素的道理：便宜的打败贵的，质量好的打败质量差的，认真的打败轻率的，耐心的打败浮躁的，勤奋的打败懒惰的，有信誉的打败没有信誉的。”</p>
+<hr /></div>
+  <div class="card-footer"><a class="source-link" href="https://t.me/yunying23/9592)" target="_blank">查看原文</a><div class="channel-links"><a href="https://t.me/yunying23">出海赚美金</a><a href="https://t.me/meiriyishu">优质资源</a><a href="https://t.me/chunse1024/8467">优质信息</a><a href="https://t.me/inside1024">内幕消息</a><a href="https://t.me/yunying23/9592">查看原文</a></div></div>
+</div></div>
+
+    <div class="footer">TG 频道日报 · 自动生成</div>
+</div>
+
+</body>
+</html>

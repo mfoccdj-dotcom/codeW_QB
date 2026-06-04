@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>TG 频道日报</title>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    background: #060814;
+    color: #e8eaf0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    font-size: 15px;
+    line-height: 1.7;
+    min-height: 100vh;
+    display: flex; justify-content: center;
+}
+
+a { color: #6ea0ff; text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+.main-wrap {
+    width: 100%;
+    max-width: 860px;
+    padding: 48px 40px 80px;
+}
+
+.hero {
+    padding-bottom: 36px;
+    margin-bottom: 36px;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+}
+.hero-vol { font-size: 11px; font-weight: 700; letter-spacing: 0.2em; color: #6ea0ff; margin-bottom: 10px; }
+.hero-title { font-size: 38px; font-weight: 800; line-height: 1.15; color: #fff; margin-bottom: 10px; }
+.hero-date { font-size: 13px; color: rgba(255,255,255,0.4); margin-bottom: 16px; }
+.hero-stats { display: flex; gap: 28px; }
+.stat-item { display: flex; flex-direction: column; gap: 2px; }
+.stat-num { font-size: 22px; font-weight: 700; color: #fff; }
+.stat-label { font-size: 11px; color: rgba(255,255,255,0.35); letter-spacing: 0.08em; text-transform: uppercase; }
+
+.section { margin-bottom: 40px; }
+.section-head {
+    display: flex; align-items: baseline; gap: 16px;
+    margin-bottom: 20px; padding-bottom: 12px;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.section-num { font-size: 28px; font-weight: 800; color: rgba(255,255,255,0.07); line-height: 1; }
+.section-title { font-size: 17px; font-weight: 700; color: #fff; }
+.section-count {
+    margin-left: auto; font-size: 11px; font-weight: 600; color: #6ea0ff;
+    background: rgba(110,160,255,0.12); padding: 2px 8px; border-radius: 20px;
+}
+
+.card {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 12px; padding: 18px 22px; margin-bottom: 12px;
+    transition: border-color 0.2s, background 0.2s;
+}
+.card:hover { border-color: rgba(110,160,255,0.3); background: rgba(110,160,255,0.04); }
+
+.card-meta { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; }
+.channel-tag {
+    font-size: 12px; font-weight: 600; color: #fff;
+    background: rgba(110,160,255,0.25); padding: 2px 8px; border-radius: 20px; white-space: nowrap;
+}
+.time-tag { font-size: 12px; color: rgba(255,255,255,0.35); }
+
+.card-title {
+    font-size: 15px; font-weight: 700; color: #fff;
+    margin-bottom: 8px; line-height: 1.5;
+}
+.card-title a { color: inherit; }
+.card-title a:hover { color: #6ea0ff; text-decoration: none; }
+
+.card-summary {
+    font-size: 14px; color: rgba(255,255,255,0.6);
+    line-height: 1.8;
+}
+.card-summary p { margin-bottom: 6px; }
+.card-summary p:last-child { margin-bottom: 0; }
+
+.card-footer {
+    margin-top: 10px; display: flex; align-items: center;
+    gap: 12px; flex-wrap: wrap;
+}
+.source-link { font-size: 12px; color: rgba(255,255,255,0.35); }
+.source-link::before { content: "🔗 "; }
+.channel-links { margin-left: auto; font-size: 11px; color: rgba(255,255,255,0.25); }
+.channel-links a { color: rgba(255,255,255,0.3); margin-right: 6px; }
+.channel-links a:hover { color: #6ea0ff; }
+
+.brief-text { font-size: 15px; color: rgba(255,255,255,0.75); line-height: 1.7; }
+
+pre { background: rgba(0,0,0,0.4); border-radius: 8px; padding: 16px; overflow-x: auto; font-size: 13px; }
+code { font-family: "SF Mono", Consolas, monospace; font-size: 0.88em; }
+p code { background: rgba(110,160,255,0.1); color: #9ec5ff; padding: 1px 6px; border-radius: 4px; }
+
+.footer {
+    text-align: center; font-size: 12px; color: rgba(255,255,255,0.2);
+    padding: 30px 0 20px; border-top: 1px solid rgba(255,255,255,0.05); margin-top: 20px;
+}
+
+@media (max-width: 768px) {
+    .main-wrap { padding: 28px 20px 60px; }
+    .hero-title { font-size: 26px; }
+}
+</style>
+</head>
+<body>
+
+<div class="main-wrap">
+    <div class="hero">
+        <div class="hero-vol">VOL.20260508</div>
+        <h1 class="hero-title">TG 频道日报</h1>
+        <div class="hero-date">2026年05月08日 · 星期五 · 2 个频道 · 16 条内容</div>
+        <div class="hero-stats">
+            <div class="stat-item"><span class="stat-num">16</span><span class="stat-label">条内容</span></div>
+            <div class="stat-item"><span class="stat-num">2</span><span class="stat-label">个频道</span></div>
+        </div>
+    </div>
+
+    <div class="section"><div class="section-head"><span class="section-num">01</span><span class="section-title">TG 频道精选</span><span class="section-count">16 条</span></div>
+<div class="card">
+  <div class="card-meta">
+    <span class="channel-tag">@inside1024</span>
+    <span class="time-tag">00:29</span>
+  </div>
+  <div class="card-title"><a href="https://t.me/inside1024/78489)" target="_blank">和AI一起上大学，毕业差距能拉这么大2026 年，全球第一批被 ChatGPT 陪着读完大学的年轻人，快要毕业了。</a></div>
+  <div class="card-summary"><p>今天，OpenAI 从中选出 26 支 18 至 26 岁的年轻人队伍（37 人），发布了「ChatGPT Futures」榜单，每支队伍获得 1 万美元奖金和最新模型访问权。官方推文像报菜名一样列出了入选者的事迹（图片放在评论区了）：</p>
+<p>·绘制了 150 万个前所未知的太空天体</p>
+<p>·通过墙壁和瓦砾探测灾难幸存者</p>
+<p>·让 1 亿多张星系图像可被自由检索</p>
+<p>·保护濒危语言</p>
+<p>·搭建基础设施，将 500 多万磅未售库存从垃圾填埋场转向再流通渠道</p>
+<p>·…</p>
+<p>先说说入选者是什么背景。</p>
+<p>斯坦福、哈佛、MIT、耶鲁、普林斯顿、加州理工学院、宾大等等，顶尖名校占了多数，但入选者的来源地横跨五大洲，巴基斯坦、秘鲁、加纳、伊朗都在其中。</p>
+<p>其中，相当一部分人也并非出身优渥，比如作为家中第一代大学生 Fatimah Hussain，靠着每天花四五个小时搜罗奖学金信息，才凑够大学学费。</p>
+<p>OpenAI 把入选者分成了 Creators、Explorers 和 Advocates 三类，大致对应创业者、研究者和倡导者：</p>
+<p>比如 Icarus Robotics 两位创始人，一个研究月球车、一个专攻机械手，要给空间站造能干体力活的机器人，已拿到 610 万美元融资，2027 年落地国际空间站。</p>
+<p>相亲产品 Known 的创始人 Celeste 是家里九个孩子的老幺，用 AI 全程撮合，旧金山测试期间近 2000 次配对中有 70% 走到了真实约会，远高于行业均值，她想把私人媒人变成人人用得起的服务。</p>
+<p>此外，Zeyneb Kaya 用 AI 完成了濒危方言 Romeyka 的第一份结构性语言学记录；Nolan Koblischke 训练出可以用自然语言检索 1 亿张星系图像的系统。Kyle Scenna 在 Intuit 实习时用 GPT-4 把税务术语翻译成普通人能懂的语言，项目演示到了 CTO 面前，顺带拿了一项专利。</p>
+<p>看完入选者的故事，很难不让人感慨 AI 的能量之大。放在过去，从想法到实践的中间隔着十万八千里，灵感也常常在漫长的折腾中「中道崩殂」。</p>
+<p>但现在，只要你会用人话提问，就能调动 AI 来为你打工。正如入选者 Kyle Scenna 所说，「从没想过发现一个问题和做出真正能用的东西之间，可以离得这么近。」</p>
+<p>当然，这份名单大概率也存在幸存者偏差。而且 OpenAI 精筛出这些大学生的故事，本质上也只是在挑选「人形广告牌」。</p>
+<p>抛却包装滤镜，这份榜单仍然抛出了一个值得认真对待的问题：当执行的门槛越来越低，真正稀缺的东西是什么？</p>
+<p>也许只是一个想解决问题的念头，以及把它彻底解决的决心那么简单。</p>
+<hr /></div>
+  <div class="card-footer"><a class="source-link" href="https://t.me/inside1024/78489)" target="_blank">查看原文</a><div class="channel-links"><a href="https://t.me/inside1024/78489">查看原文</a></div></div>
+</div>
+<div class="card">
+  <div class="card-meta">
+    <span class="channel-tag">@inside1024</span>
+    <span class="time-tag">04:56</span>
+  </div>
+  <div class="card-title"><a href="https://t.me/inside1024/78495)" target="_blank">AI 时代，还倡导加班的公司，不值得加入。</a></div>
+  <div class="card-summary"><hr /></div>
+  <div class="card-footer"><a class="source-link" href="https://t.me/inside1024/78495)" target="_blank">查看原文</a><div class="channel-links"><a href="https://t.me/inside1024/78495">查看原文</a></div></div>
+</div>
+<div class="card">
+  <div class="card-meta">
+    <span class="channel-tag">@yunying23</span>
+    <span class="time-tag">09:17</span>
+  </div>
+  <div class="card-title"><a href="https://t.me/yunying23/9615)" target="_blank">200+ 的人生经验，或许能让你少走 10年 弯路！</a></div>
+  <div class="card-summary"><ol>
+<li>
+<p>心态与行动力（约占40%）</p>
+</li>
+<li>
+<p>健康与身体（约占20%）</p>
+</li>
+<li>
+<p>学习与技能提升（约占15%）</p>
+</li>
+<li>
+<p>财务与投资（约占10%）</p>
+</li>
+<li>
+<p>人际与情感（约占10%）</p>
+</li>
+<li>
+<p>其他建议（约占5%，杂类）</p>
+</li>
+</ol>
+<p>我将 “精华” 整理成了 6 个模块👇</p>
+<p>心态篇：</p>
+<p>别等，行动起来！“干就完了，别管他人看法。想到什么就去做，大不了回到原点。” - 勇敢是成事第一步！</p>
+<p>“尽可能大的去犯错，多尝试不同的东西，找到喜欢的并坚持。”</p>
+<p>健康篇：</p>
+<p>身体是革命本钱！“保护好你的腰，锻炼身体，保护膝盖、关节、眼睛、心脑血管。” - 健康没了，一切白搭！</p>
+<p>“远离烟酒，按时睡觉，减少熬夜。钱是挣不完的，好好爱自己。” - 别用健康换金钱！</p>
+<p>学习篇：</p>
+<p>投资自己，永不过时！“好好学英语，好好学AI。紧跟时代发展。” - 技能是你的护城河！</p>
+<p>“不断积累知识，多看报看书，形成自己的知识体系。” - 终身学习，碾压平庸！</p>
+<p>财务篇：</p>
+<p>早规划，早自由！“努力搞钱，学理财，要攒钱。定投指数，别投机梭哈。” - 财务自由从现在开始！</p>
+<p>人际篇：</p>
+<p>爱与被爱是人生调味剂！“好好谈恋爱，追求喜欢的女孩，谈场浪漫恋爱。” - 别错过青春的悸动！</p>
+<p>“多陪伴家人，珍惜和他们时间，多带出去旅游，拍视频留记忆。” - 家人是永恒后盾！</p>
+<p>底线篇：</p>
+<p>守住原则！“不作恶。保持谦卑，不要放弃学习，韧性最重要。” - 做人底线，决定高度！</p>
+<hr /></div>
+  <div class="card-footer"><a class="source-link" href="https://t.me/yunying23/9615)" target="_blank">查看原文</a><div class="channel-links"><a href="https://t.me/yunying23">出海赚美金</a><a href="https://t.me/meiriyishu">优质资源</a><a href="https://t.me/chunse1024/8467">优质信息</a><a href="https://t.me/inside1024">内幕消息</a><a href="https://t.me/yunying23/9615">查看原文</a></div></div>
+</div>
+<div class="card">
+  <div class="card-meta">
+    <span class="channel-tag">@yunying23</span>
+    <span class="time-tag">10:08</span>
+  </div>
+  <div class="card-title"><a href="https://t.me/yunying23/9616)" target="_blank">出海 SaaS 上线流程又被压了一档</a></div>
+  <div class="card-summary"><p>Cloudflare 现在让 agent 直接做完三件事</p>
+<p>开账号</p>
+<p>买域名</p>
+<p>deploy</p>
+<p>我用 Claude Code + Cloudflare 跑了一遍</p>
+<p>从 idea 到上线不到30分钟</p>
+<hr /></div>
+  <div class="card-footer"><a class="source-link" href="https://t.me/yunying23/9616)" target="_blank">查看原文</a><div class="channel-links"><a href="https://t.me/yunying23/9616">查看原文</a></div></div>
+</div>
+<div class="card">
+  <div class="card-meta">
+    <span class="channel-tag">@inside1024</span>
+    <span class="time-tag">10:12</span>
+  </div>
+  <div class="card-title"><a href="https://t.me/inside1024/78501)" target="_blank">爆款其实就是跟平台的同谋。</a></div>
+  <div class="card-summary"><p>与其研究营销趋势，还不如多看看公司财报。</p>
+<p>下面这几个海外营销渠道，在2025年，平台有你，非常重要。</p>
+<p>大家可以放心吃肉：</p>
+<ol>
+<li>
+<p>Facebook Reels</p>
+</li>
+<li>
+<p>Youtube Shorts</p>
+</li>
+<li>
+<p>Tiktok Live</p>
+</li>
+<li>
+<p>Reddit Ads</p>
+</li>
+<li>
+<p>Linkedin Short Videos</p>
+</li>
+</ol>
+<p>自媒体/出海经验/赚美金/运营技巧</p>
+<hr /></div>
+  <div class="card-footer"><a class="source-link" href="https://t.me/inside1024/78501)" target="_blank">查看原文</a><div class="channel-links"><a href="https://t.me/inside1024/78501">查看原文</a></div></div>
+</div>
+<div class="card">
+  <div class="card-meta">
+    <span class="channel-tag">@yunying23</span>
+    <span class="time-tag">11:03</span>
+  </div>
+  <div class="card-title"><a href="https://t.me/yunying23/9619)" target="_blank">Adsterra的流量劫持导致排名下降。 Monetag也差不多德行。Adsense 死活不通过。 流量都白白浪费了。真是无语了。</a></div>
+  <div class="card-summary"><hr /></div>
+  <div class="card-footer"><a class="source-link" href="https://t.me/yunying23/9619)" target="_blank">查看原文</a><div class="channel-links"><a href="https://t.me/yunying23/9619">查看原文</a></div></div>
+</div>
+<div class="card">
+  <div class="card-meta">
+    <span class="channel-tag">@inside1024</span>
+    <span class="time-tag">13:15</span>
+  </div>
+  <div class="card-title"><a href="https://t.me/inside1024/78511)" target="_blank">哈哈哈</a></div>
+  <div class="card-summary"><p>这位美女叫 军师77懂女生 ，在抖音发的视频，要第一时间下载，因为过一会儿突然就没了，被集美们投诉下架🤣，号也是经常被封。</p>
+<p>她自己也说，自从站位以后被下架了几十个视频，你们越疯狂下架我就越要说。昨天还把号干没了……</p>
+<p>这里： - 小红书头号通缉犯令 必杀榜第一名 -</p>
+<hr /></div>
+  <div class="card-footer"><a class="source-link" href="https://t.me/inside1024/78511)" target="_blank">查看原文</a><div class="channel-links"><a href="https://t.me/inside1024">内幕消息</a><a href="https://t.me/meiriyishu">优质资源</a><a href="https://t.me/chunse1024/8467">优质信息</a><a href="https://t.me/inside1024/78511">查看原文</a></div></div>
+</div>
+<div class="card">
+  <div class="card-meta">
+    <span class="channel-tag">@inside1024</span>
+    <span class="time-tag">14:22</span>
+  </div>
+  <div class="card-title"><a href="https://t.me/inside1024/78512)" target="_blank">哈哈哈 GPT 给出的四条人生第一性原理:</a></div>
+  <div class="card-summary"><p>你只对自己的选择与边界负责。</p>
+<p>任何长期能量净流出的系统，必然崩溃。</p>
+<p>责任必须和权力匹配，否则一定会内耗。</p>
+<p>一个人必须为自己的人生付出“不可转移的代价”。</p>
+<hr /></div>
+  <div class="card-footer"><a class="source-link" href="https://t.me/inside1024/78512)" target="_blank">查看原文</a><div class="channel-links"><a href="https://t.me/inside1024">内幕消息</a><a href="https://t.me/meiriyishu">优质资源</a><a href="https://t.me/chunse1024/8467">优质信息</a><a href="https://t.me/inside1024/78512">查看原文</a></div></div>
+</div>
+<div class="card">
+  <div class="card-meta">
+    <span class="channel-tag">@yunying23</span>
+    <span class="time-tag">14:25</span>
+  </div>
+  <div class="card-title"><a href="https://t.me/yunying23/9621)" target="_blank">这波红利期，视频博主确实“值钱”——尤其AI相关，门槛不高（剪辑+脚本+热点），回报却爆炸。</a></div>
+  <div class="card-summary"><p>4单/月，保守算算（按6万均价），光副业就月入24万+，比大多数全职工资高出几条街。接商单快准狠，不用等年终奖，AI产品方急需内容输出，你就是他们的“救火队长”。</p>
+<p>对比工资：公司涨薪通常5-15%/年，这几个月翻倍，纯靠市场杠杆。内容创作者就是流量经济里的“鲨鱼”。</p>
+<p>定义“价值”金钱角度：高，但不稳。</p>
+<p>AI热潮总有凉的时候（想想NFT、元宇宙），商单方一缩预算，报价再高也得打折。</p>
+<p>不断产“破烂视频”确实容易灵魂疲惫，价值感来自于“影响力和满足感”，不是纯KPI。</p>
+<p>假如能升级内容，比如从纯广告变深度AI教程，或加个人IP，那博主价值就从“工具人”跃升到“意见领袖”，可持续性强多了。</p>
+<p>犹豫“接与不接”，说明内心在拉扯：</p>
+<p>接了赚快钱，质量低；不接，机会溜走。这钱买来了自由，还是加了牢笼？</p>
+<p>定“质量线”——</p>
+<p>每个单子至少花20%时间优化（加点原创洞见，别纯水），这样不亏钱，还能积累粉丝。</p>
+<p>报价继续涨，但挑单子：只接匹配你调性的AI品牌，拒绝纯“砸钱不讲故事”的。</p>
+<p>视频博主价值高不高，取决于IP。用商单素材变原创系列。或者，转型咨询/课程——你这DeepSeek实战经验，</p>
+<p>解药：每天花10分钟写日记：今天这个单子让我学到啥？</p>
+<p>它让我开心吗？如果答案是“只剩钱”，就果断pass。金钱是手段，价值是“睡得香不香”。</p>
+<hr /></div>
+  <div class="card-footer"><a class="source-link" href="https://t.me/yunying23/9621)" target="_blank">查看原文</a><div class="channel-links"><a href="https://t.me/yunying23">出海赚美金</a><a href="https://t.me/meiriyishu">优质资源</a><a href="https://t.me/chunse1024/8467">优质信息</a><a href="https://t.me/inside1024">内幕消息</a><a href="https://t.me/yunying23/9621">查看原文</a></div></div>
+</div>
+<div class="card">
+  <div class="card-meta">
+    <span class="channel-tag">@inside1024</span>
+    <span class="time-tag">15:18</span>
+  </div>
+  <div class="card-title"><a href="https://t.me/inside1024/78513)" target="_blank">一位股市短线高手说：在股市最快最笨的翻倍方法，我从10万做到100万，靠的就是稳定的盈利！</a></div>
+  <div class="card-summary"><p>第一：浮盈不加仓。</p>
+<p>小资金第一要注意的不是赚很多钱，第一要注意的而是不亏钱。这一点可能和很多人想的不一样，很多人认为做小资金就该去赌博，其实这样大错特错。</p>
+<p>其实小资金更应该注意风险，保护好自己的本金，因为小资没了就真的没了。</p>
+<p>巴菲特该说的早就说了，投资的第一要务是保护本金，第二条是看第一条，第三条是看第二条，巴菲特早期其实也是做短线的，巴菲特早期的年华收益率是50%以上，但是保护本金依然是最重要的。</p>
+<p>记住，在股市，高手都是善于控制风险的，只是新手才会去冒险。不相信大家可以去看看那些高手的交易记录，把他们的交割单都拿出来看看大家就会明白，他们的收益曲线一般就两种，一种是慢慢的曲线向上的，一种是台阶式向上的，这两种是最常见的，曲线向上的一般都是做抄跌反弹的，台阶式向上的那手法就多了，但是依然能赚钱，为什么呢？</p>
+<p>因为台阶向上的能很好的人控制回撤，有时候甚至能保持一段时间不出手，出手就是上一个小台阶，这种高手一般追求确定性，所以他的曲线是一步一步做上来的。</p>
+<p>所以浮盈：不加仓，在底部的时候买入，在行情崛起时持有，在行情高涨时卖出，冷静应对，耐心持股，做好确定性，就能让财富一步一步的上升。</p>
+<p>第二：只做强势低吸。小资金做大，最稳定且最确定的模式就是做强势低吸。什么是强势低吸？我们可以拆开来看，何为强势？</p>
+<p>说白了就是市场选择的主线，先选择大的行业加行情，比如说Al加科技，比如说医药里面的创新药，再比如说有色金属，这种大方向上在需求增加，而且具有稀缺性加上向上无限空间的行业，很多人不理解什么是空间。</p>
+<p>比如美国的Al，个个都是万亿市值，英伟达最高点五万亿美元，苹果四万亿美元，谷歌四万亿美元，这种就是向上空间无限的行业，所以A股一般具有滞后性，选择行业就选择这样的行业就可以了，比如说对标美国的英伟达，找到英伟达的产业链，在al应用里面找到中国的谷歌，同时找到谷歌的产业链，这就是方向上的选择。</p>
+<p>我们再聊聊为什么选择创新药？因为礼来市值已经突破万亿美金了，所以在A股一定要提前布局，未来老龄化的需求一定是增加，特别是对于中国这个人口大国来说，所以我们一定会有自己的创新药，那么为什么是创新药呢？</p>
+<p>因为创新药还附带了一个出海逻辑，属于向上空间无限的行业。在聊聊为什么是有色金属，因为未来有色会属稀缺品，比如黄金，白银，铜等最常见的金属。</p>
+<p>随着未来的通货膨胀，未来一定会加速的印钞，黄金就成了最好的资产，未来钱会变得越来越不值钱。这就是大方向的选择，那么我们要什么时候介入呢？</p>
+<p>不是最底部也不是最底部，而是做强势低吸，就是等一个股票起来以后进去观察区，然后等进入调整后，在慢慢进入，几个行业可以轮着来，做一个滑头就可以了，赚中间的点，比如有的人赚20%-30%，有的人选择做10%，这个看自己的选择，结合图形做确定性的行情，做一个滑头就可以了，在正确的方向上，调整就低吸，只赚该赚的钱，向上无限空间，选择几个板块轮流做，这样就能稳定盈利。</p>
+<p>第三：跟随市场，只做当下主线，不做预测。做主线还有一个问就是，就是做好当下主线即可，不要去想新的主线，也不要去预测市场。很多人有一个普遍的矛盾，就是想着下一波是什么？</p>
+<p>总想着去预测然后提前做埋伏，这样是好，但是有一个问就是总想着未来的人，很难做好当下的事情。因为这次主线你都不珍惜，不做不好，都不选择跟随，下次主线行情来临的时候你依然做不好，这就是人的常态。</p>
+<p>比如公司给你一个好的项目，你总想着更好的项目，就选择不做，那么下次机会来临的时候依然做不好。所以做股票也是如此，能做好当下行情，就不要去轻易去预测行情。做好当下才能赚到该赚到的钱，去预测未来是赚想赚的钱，你只有把该赚到的钱赚了，才能去赚想赚的钱。</p>
+<p>这就像是经常有人问段永平，下一个茅台和苹果是谁？段永平回答，总有人问我下一个茅台和苹果是哪一家公司，从而错过了当下的茅台和苹果。</p>
+<p>这个说法太对了，未来是不可以预测的，但是当下是可以赚钱的，只有做好当下的人，才能为未来做准备，所以不要总是想去预测行情，我们普通人就跟随市场，做好主线，赚该赚的钱，稳定盈利即可。</p>
+<p>最后，市场是不可预测的，所以我们一定要做好主线，控制风险，现在长线无限空间，总体需求增加的行业，选择2-3条线轮流做，只做强势低吸，只赚中间部分的钱，只赚该赚的钱，不预测行情，跟随市场，做好当下。</p>
+<p>希望大家都能够稳定的在股市盈利。</p>
+<p>以上只代表个人观点，均不构成投资建议。</p>
+<hr /></div>
+  <div class="card-footer"><a class="source-link" href="https://t.me/inside1024/78513)" target="_blank">查看原文</a><div class="channel-links"><a href="https://t.me/inside1024/78513">查看原文</a></div></div>
+</div>
+<div class="card">
+  <div class="card-meta">
+    <span class="channel-tag">@yunying23</span>
+    <span class="time-tag">16:29</span>
+  </div>
+  <div class="card-title"><a href="https://t.me/yunying23/9623)" target="_blank">补充解释一下</a></div>
+  <div class="card-summary"><p>1.AITDK</p>
+<p>浏览器插件，能直接显示网站的流量来源、关键词排名、SEO 难度等核心指标。</p>
+<p>2.SEOquake</p>
+<p>老牌 SEO 插件，一键查看网页的关键词密度、Meta 信息、收录情况</p>
+<p>3.Wappalyzer</p>
+<p>用来识别网站的技术栈（框架、CMS、支付系统、分析工具等），出海做对标时特别有用，可以直接看竞争对手在用什么技术组合。</p>
+<p>这三款工具配合使用，基本能覆盖 流量 → SEO → 技术栈 的初步调研。</p>
+<hr /></div>
+  <div class="card-footer"><a class="source-link" href="https://t.me/yunying23/9623)" target="_blank">查看原文</a><div class="channel-links"><a href="https://t.me/yunying23">出海赚美金</a><a href="https://t.me/meiriyishu">优质资源</a><a href="https://t.me/chunse1024/8467">优质信息</a><a href="https://t.me/inside1024">内幕消息</a><a href="https://t.me/yunying23/9623">查看原文</a></div></div>
+</div>
+<div class="card">
+  <div class="card-meta">
+    <span class="channel-tag">@inside1024</span>
+    <span class="time-tag">18:16</span>
+  </div>
+  <div class="card-title"><a href="https://t.me/inside1024/78523)" target="_blank">为什么现代社会充斥着网络暴力，而且没有丝毫改善的迹象？</a></div>
+  <div class="card-summary"><p>因为现代社交媒体的设计机制，一开始就冲着促成极端观点传播去的。比如新闻分发时，如果转评赞的数据好，获得的流量就越高，</p>
+<p>在流量至上的逻辑下，内容的供给方（比如报纸、电视台、新媒体账号、自媒体人），便会想方设法的去挖掘能够激发观众的G点，</p>
+<p>这些“G点”都是极端化的，</p>
+<p>比如标要劲爆、内容要辛辣、观点要鲜明，</p>
+<p>否则用户们都懒得点进去看。</p>
+<p>而内容的消费方（受众），也因为每天沉浸在海量的内容里面，已经无法接纳平铺直叙、毫无新意的信息了，</p>
+<p>用户的兴奋阈值，被推荐算法和劲爆新闻调教得越来越高，</p>
+<p>于是党同伐异的风气逐渐形成，用户在互联网上必须有某种身份才能生存，</p>
+<p>左或右、粉或黑、厌狗的和喜狗的、厌恶异性或添异性的，</p>
+<p>无论被动或主动，用户们都被分配到一个立场鲜明的身份。</p>
+<p>“如果一个人感觉到他的意见是少数的，他会倾向于不表达出来”，这就是沉默的螺旋。</p>
+<p>更可怕的是，无论是极端的白、或者极端的黑，都能找到共鸣，</p>
+<p>反而是中间派、客观理性的一方，被称为“理中客“，他们的观点无法在流量至上、情绪至上的社交媒体中获得转评赞，只能被淹没在极端观点下面，</p>
+<p>最直白的体现，就是我们可以看到几乎所有社会新闻的这里，点赞最高的评论永远是拉仇恨的、输出情绪的。</p>
+<p>更可恨的是，某些人利用这种流量规则在做生意，很多这里沦为广告商的地盘，</p>
+<p>他们不在乎事情对错，甚至不在乎自己观点，只在乎点赞足够多排名到前面，就能给账号引流带货。</p>
+<p>而新闻的源头，则更加善于运用断章取义、春秋笔法的手法，去炮制新闻。</p>
+<p>于是在刘学州等新闻当事人的社交媒体里，极端谩骂的观点被点赞到前头，被看到后，形成事实的网络暴力，产生悲剧。</p>
+<p>那么问来了，在这套逻辑下面，到底谁应该负责呢，</p>
+<p>流量规则的制定者？</p>
+<p>内容的供给方？</p>
+<p>内容的消费方？</p>
+<hr /></div>
+  <div class="card-footer"><a class="source-link" href="https://t.me/inside1024/78523)" target="_blank">查看原文</a><div class="channel-links"><a href="https://t.me/inside1024">内幕消息</a><a href="https://t.me/meiriyishu">优质资源</a><a href="https://t.me/chunse1024/8467">优质信息</a><a href="https://t.me/inside1024/78523">查看原文</a></div></div>
+</div>
+<div class="card">
+  <div class="card-meta">
+    <span class="channel-tag">@inside1024</span>
+    <span class="time-tag">20:16</span>
+  </div>
+  <div class="card-title"><a href="https://t.me/inside1024/78525)" target="_blank">#内幕消息</a></div>
+  <div class="card-summary"><p>分享TikTok最新信息差，很多你不知道的事！</p>
+<p>1.海外短剧目前大火，霸总爱上我的剧情把老外整得迷糊的，除了TikTok series的直接变现之外，剧中的每一个演员都是商业价值极高的IP</p>
+<p>2.一些有国内千川等业务背景的团队搞海外，发现Roi根本不讲道理，和国内比真的悬殊很大</p>
+<p>3.海外目前的供应链完整度和其他基建还是不完善的，不完善才造就了诸多机会和漏洞</p>
+<p>4.目前TikTok90％的销量还是依靠货带人，粉丝量级和带货结果没有必然联系，甚至在大多数情况下可以用“毫不相干”来形容。</p>
+<p>5.按照目前欧美的管控趋势，预判不久可能会限制华人带货</p>
+<p>6.很多新入局TK的老板想的都是出货，现实是通道比较窄，信息差比较大，穿越了通道后发现池子还是可以的</p>
+<p>7.很多人去美国一趟考察没多久就回来，主要是为了营造人设收费</p>
+<p>8.真正在美国落地的华人团队很多是在洛杉矶</p>
+<p>9.一些国内知识付费的顶级玩家已经在TikTok拿到结果，光靠教老外用剪映（海外版capcut），帮老外做IP一年就搞上千个。</p>
+<p>10.这个阶段中国商家别太想在TikTok做 “品牌”</p>
+<p>11.在玩美国的团队就知道了，比主播更贵的是运营</p>
+<p>12.最早玩抖音的一些暴富的玩家你可以认为大部分是“草莽出身”，现在玩儿TK的玩家可不是那个时候了</p>
+<p>13.如果从带货的角度，人货场三要素国内都很卷，在海外TikTok，货目前第一重要（产品和价格75％），人目前第二（20％），场目前第三（5％），比例没有依据，做过两年以上的人可能懂</p>
+<p>14.英国市场的风控也开始快速升级了</p>
+<p>15.目前海外也有免固定费免佣金的达人合作模式，针对一些小达人给样品就够了</p>
+<p>16.达人合作数量不在于多 而在于可控和长期，漫天撒网的建联成功率10～20％，带货成功率（做了直播或者短视频带货动作），出单成功率还会再次打折，最终结果可能是3％以内（一些品类头部卖家的数据）</p>
+<p>17.价格在工厂，预算在品牌，现在出海做零售的工厂预算还是有一些的，但是不会像品牌打法那样先出血后赚钱，工厂人不听这一套虚的</p>
+<p>18.选品在贸易商，做品在制造商，快速测品靠的是做“宽度”的能力，而真的打爆还是要靠做“深度”的能力</p>
+<p>19.有时候全托管的价格卖着卖着就提上去了，不是商家涨价了，是平台涨价了，商家并没有定价权</p>
+<p>20.全托管新品的折扣力度比较大，平台亏一点是不管的，销量上去以后就涨价是因为平台有人核查畅销品的利润，以及考核物流费</p>
+<p>21.说一个在平台做过很多年的人才知道的秘密，所有的红利里面最大的红利还是“合理利用平台规则的BUG”，就比如，全托管很多品类现在限制不大，还比如平台的物流费还没有开始考核</p>
+<p>22.很多团队做了一年以上都在围绕一个问题纠结，做“实”还是做“虚”</p>
+<p>23.依然有很多人死磕东南亚赛道，尤其是印尼据说要重新回归后大家又恢复了信心</p>
+<p>24.最近很多单场过万美金的直播间都是不到一万粉甚至不到一千粉的</p>
+<p>25.对于大部分国内团队来说，解决“优质网络”和“账号权重”的问题可以解决目前80％的问题</p>
+<p>26.一些割韭菜的团队乐此不疲的推荐大家“买店”核心还是因为“变现快”“轻交付”，F了就等于“交付完成”了</p>
+<p>27.如果真的要做欧美本土店，还是自己的资料更放心</p>
+<p>28.目前TikTok全托管业务平台是亏钱的，补贴不长久，所以后期的佣金，折扣补贴，流量扶持都会缩减</p>
+<p>29.很多付费的“社群”只会让你看到、知道，不代表可以让你“做到”和“得到”，做到后者还得靠自己，所谓的“资源”合作是建立在双方实力对等的基础上。</p>
+<p>30.供应链资源，带货经验，内容运营能力都不具备的新手不建议再入局TikTok，新手小白的红利基本已经结束。</p>
+<hr /></div>
+  <div class="card-footer"><a class="source-link" href="https://t.me/inside1024/78525)" target="_blank">查看原文</a><div class="channel-links"><a href="https://t.me/inside1024/78525">查看原文</a></div></div>
+</div>
+<div class="card">
+  <div class="card-meta">
+    <span class="channel-tag">@yunying23</span>
+    <span class="time-tag">22:32</span>
+  </div>
+  <div class="card-title"><a href="https://t.me/yunying23/9628)" target="_blank">semrush换账号换银行卡（需要背后有三位数CVV码的卡，银行卡，信用卡都行）可以注册7天免费试用，有5w api额度，绑卡后可以直接disable recurring payment 这样7天后就不会自动扣费。</a></div>
+  <div class="card-summary"><p>然后semrush有mcp，可以直接让cc或codex连接mcp，这样就可以直接在终端指挥ai用semrush做site audit, keyword, backlink等等分析了，尤其是外链收集用这种方式可以无痛产出excel list</p>
+<hr /></div>
+  <div class="card-footer"><a class="source-link" href="https://t.me/yunying23/9628)" target="_blank">查看原文</a><div class="channel-links"><a href="https://t.me/yunying23/9628">查看原文</a></div></div>
+</div>
+<div class="card">
+  <div class="card-meta">
+    <span class="channel-tag">@yunying23</span>
+    <span class="time-tag">22:45</span>
+  </div>
+  <div class="card-title"><a href="https://t.me/yunying23/9630)" target="_blank">感谢@JasperC. 让我成为尊贵的瑞士银行卡主。😎 用护照就可以开卡，可以轻松订阅正版 GPT Pro，还可以买卖加密货币。订阅可以选菲律宾区，人民币 1000 块就可以订阅破 20x。</a></div>
+  <div class="card-summary"><p>下载 SafePay，可以直接注册货币账户，再开通银行卡账户。</p>
+<p>政策正在收紧，有需要的最好早点开。</p>
+<hr /></div>
+  <div class="card-footer"><a class="source-link" href="https://t.me/yunying23/9630)" target="_blank">查看原文</a><div class="channel-links"><a href="https://t.me/yunying23/9630">查看原文</a></div></div>
+</div>
+<div class="card">
+  <div class="card-meta">
+    <span class="channel-tag">@yunying23</span>
+    <span class="time-tag">23:31</span>
+  </div>
+  <div class="card-title"><a href="https://t.me/yunying23/9631)" target="_blank">有个薅羊毛的用户注册了20个账号来薅新用户赠送的积分，因为流量不大，所以没有做啥验证，但是也经不住这样猛操啊。暂时加了个浏览器指纹识别，同一个指纹注册的用户只有第一次赠送积分。</a></div>
+  <div class="card-summary"><hr /></div>
+  <div class="card-footer"><a class="source-link" href="https://t.me/yunying23/9631)" target="_blank">查看原文</a><div class="channel-links"><a href="https://t.me/yunying23/9631">查看原文</a></div></div>
+</div></div>
+
+    <div class="footer">TG 频道日报 · 自动生成</div>
+</div>
+
+</body>
+</html>

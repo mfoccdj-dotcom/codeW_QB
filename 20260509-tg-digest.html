@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>TG 频道日报</title>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    background: #060814;
+    color: #e8eaf0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    font-size: 15px;
+    line-height: 1.7;
+    min-height: 100vh;
+    display: flex; justify-content: center;
+}
+
+a { color: #6ea0ff; text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+.main-wrap {
+    width: 100%;
+    max-width: 860px;
+    padding: 48px 40px 80px;
+}
+
+.hero {
+    padding-bottom: 36px;
+    margin-bottom: 36px;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+}
+.hero-vol { font-size: 11px; font-weight: 700; letter-spacing: 0.2em; color: #6ea0ff; margin-bottom: 10px; }
+.hero-title { font-size: 38px; font-weight: 800; line-height: 1.15; color: #fff; margin-bottom: 10px; }
+.hero-date { font-size: 13px; color: rgba(255,255,255,0.4); margin-bottom: 16px; }
+.hero-stats { display: flex; gap: 28px; }
+.stat-item { display: flex; flex-direction: column; gap: 2px; }
+.stat-num { font-size: 22px; font-weight: 700; color: #fff; }
+.stat-label { font-size: 11px; color: rgba(255,255,255,0.35); letter-spacing: 0.08em; text-transform: uppercase; }
+
+.section { margin-bottom: 40px; }
+.section-head {
+    display: flex; align-items: baseline; gap: 16px;
+    margin-bottom: 20px; padding-bottom: 12px;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.section-num { font-size: 28px; font-weight: 800; color: rgba(255,255,255,0.07); line-height: 1; }
+.section-title { font-size: 17px; font-weight: 700; color: #fff; }
+.section-count {
+    margin-left: auto; font-size: 11px; font-weight: 600; color: #6ea0ff;
+    background: rgba(110,160,255,0.12); padding: 2px 8px; border-radius: 20px;
+}
+
+.card {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 12px; padding: 18px 22px; margin-bottom: 12px;
+    transition: border-color 0.2s, background 0.2s;
+}
+.card:hover { border-color: rgba(110,160,255,0.3); background: rgba(110,160,255,0.04); }
+
+.card-meta { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; }
+.channel-tag {
+    font-size: 12px; font-weight: 600; color: #fff;
+    background: rgba(110,160,255,0.25); padding: 2px 8px; border-radius: 20px; white-space: nowrap;
+}
+.time-tag { font-size: 12px; color: rgba(255,255,255,0.35); }
+
+.card-title {
+    font-size: 15px; font-weight: 700; color: #fff;
+    margin-bottom: 8px; line-height: 1.5;
+}
+.card-title a { color: inherit; }
+.card-title a:hover { color: #6ea0ff; text-decoration: none; }
+
+.card-summary {
+    font-size: 14px; color: rgba(255,255,255,0.6);
+    line-height: 1.8;
+}
+.card-summary p { margin-bottom: 6px; }
+.card-summary p:last-child { margin-bottom: 0; }
+
+.card-footer {
+    margin-top: 10px; display: flex; align-items: center;
+    gap: 12px; flex-wrap: wrap;
+}
+.source-link { font-size: 12px; color: rgba(255,255,255,0.35); }
+.source-link::before { content: "🔗 "; }
+.channel-links { margin-left: auto; font-size: 11px; color: rgba(255,255,255,0.25); }
+.channel-links a { color: rgba(255,255,255,0.3); margin-right: 6px; }
+.channel-links a:hover { color: #6ea0ff; }
+
+.brief-text { font-size: 15px; color: rgba(255,255,255,0.75); line-height: 1.7; }
+
+pre { background: rgba(0,0,0,0.4); border-radius: 8px; padding: 16px; overflow-x: auto; font-size: 13px; }
+code { font-family: "SF Mono", Consolas, monospace; font-size: 0.88em; }
+p code { background: rgba(110,160,255,0.1); color: #9ec5ff; padding: 1px 6px; border-radius: 4px; }
+
+.footer {
+    text-align: center; font-size: 12px; color: rgba(255,255,255,0.2);
+    padding: 30px 0 20px; border-top: 1px solid rgba(255,255,255,0.05); margin-top: 20px;
+}
+
+@media (max-width: 768px) {
+    .main-wrap { padding: 28px 20px 60px; }
+    .hero-title { font-size: 26px; }
+}
+</style>
+</head>
+<body>
+
+<div class="main-wrap">
+    <div class="hero">
+        <div class="hero-vol">VOL.20260509</div>
+        <h1 class="hero-title">TG 频道日报</h1>
+        <div class="hero-date">2026年05月09日 · 星期六 · 2 个频道 · 13 条内容</div>
+        <div class="hero-stats">
+            <div class="stat-item"><span class="stat-num">13</span><span class="stat-label">条内容</span></div>
+            <div class="stat-item"><span class="stat-num">2</span><span class="stat-label">个频道</span></div>
+        </div>
+    </div>
+
+    <div class="section"><div class="section-head"><span class="section-num">01</span><span class="section-title">TG 频道精选</span><span class="section-count">13 条</span></div>
+<div class="card">
+  <div class="card-meta">
+    <span class="channel-tag">@inside1024</span>
+    <span class="time-tag">04:10</span>
+  </div>
+  <div class="card-title"><a href="https://t.me/inside1024/78541)" target="_blank">都多。</a></div>
+  <div class="card-summary"><p>她说：</p>
+<p>“大家都想做高大上的AI、金融、互联网，没人愿意看一眼地上的污垢。</p>
+<p>但我知道，只要有人的地方就有污垢，只要我能把污垢处理掉，我就有赚不完的钱。”</p>
+<p>这就是专业：</p>
+<p>真正的专业不是穿得像精英，而是解决问的能力不可替代。</p>
+<p>很多老实人、读书人穷，是因为带着根深蒂固的学生思维：</p>
+<p>赚钱应该优雅、逻辑清晰、被社会主流认可。</p>
+<p>一旦看起来有点低端、需要求人、说好、和形形色色的人打交道，就本能排斥。</p>
+<p>但现实残酷：</p>
+<p>一张从废品站赚来的百元大钞，和从投行赚来的百元大钞，购买力一模一样。</p>
+<p>真正潇洒的人，早就把自我和生意分开：</p>
+<p>生意场上只有利益和效率，</p>
+<p>生活里因为有钱，才拥有真正的面子和尊严。</p>
+<p>他们用暂时的“不体面”，换一辈子的选择权。</p>
+<p>如果你现在觉得瓶颈，每天累死却赚不到钱，</p>
+<p>不妨换个思路：</p>
+<p>看看那些不体面的角落，那些大家抱怨却不得不干的脏活累活，</p>
+<p>那里往往藏着巨大的现金流。</p>
+<p>放下身段。</p>
+<p>如果你还觉得丢人，说明你还没穷够。</p>
+<p>当你意识到没钱给孩子交学费、没钱给父母看病才最丢人的时候，</p>
+<p>你就能弯下腰了。</p>
+<p>把不体面的事做体面，就是巨大的机会。</p>
+<p>用现代管理、专业服务标准，去改造一个传统、低端行业，</p>
+<p>那就是降维打击。</p>
+<p>守住你的嘴：闷声发财。</p>
+<p>不需要发朋友圈显摆，不需要让全世界知道你在干什么。</p>
+<p>钱到手了，比什么都强。</p>
+<p>这个世界很公平：</p>
+<p>想坐在空调房里、想受人尊敬、想工作环境优美，</p>
+<p>你就得接受微薄薪水和激烈内卷。</p>
+<p>如果你愿意面对灰尘、噪音、汗水和别人的冷眼，</p>
+<p>这个世界就会给你极其丰厚的回报。</p>
+<p>体面是给别人看的，财富是给自己用的。</p>
+<p>别再为了虚伪的面子，错过那些灰头土脸却能让你挺起腰杆的生意。</p>
+<p>记住：</p>
+<p>当你有钱的时候，你做什么都是体面的；</p>
+<p>当你没钱的时候，你再怎么装也掩盖不了生活的寒酸。</p>
+<p>愿你早日看透这一点，</p>
+<p>从华而不实的幻象里走出来，</p>
+<p>去赚那些实实在在、甚至有点脏的钱，</p>
+<p>然后过上最干净、最潇洒的人生。</p>
+<hr /></div>
+  <div class="card-footer"><a class="source-link" href="https://t.me/inside1024/78541)" target="_blank">查看原文</a><div class="channel-links"><a href="https://t.me/inside1024">内幕消息</a><a href="https://t.me/meiriyishu">优质资源</a><a href="https://t.me/chunse1024/8467">优质信息</a><a href="https://t.me/inside1024/78541">查看原文</a></div></div>
+</div>
+<div class="card">
+  <div class="card-meta">
+    <span class="channel-tag">@inside1024</span>
+    <span class="time-tag">04:56</span>
+  </div>
+  <div class="card-title"><a href="https://t.me/inside1024/78542)" target="_blank">一晚迭代了三版，一边测试AI审核边界，一边改提示词。估计明天能肝出来了。</a></div>
+  <div class="card-summary"><p>AIGC的一切</p>
+<hr /></div>
+  <div class="card-footer"><a class="source-link" href="https://t.me/inside1024/78542)" target="_blank">查看原文</a><div class="channel-links"><a href="https://t.me/inside1024/78542">查看原文</a></div></div>
+</div>
+<div class="card">
+  <div class="card-meta">
+    <span class="channel-tag">@inside1024</span>
+    <span class="time-tag">06:41</span>
+  </div>
+  <div class="card-title"><a href="https://t.me/inside1024/78545)" target="_blank">和富有群体之间最大的差别就是杠杆的应用。想一辈子不用打工的，就必须学会借力，同样也有三个方向：</a></div>
+  <div class="card-summary"><p>1、技术杠杆：善用AI工具、软件脚本、自动化系统。一个人当成了一个团队，让机器帮你做重复性的工作。</p>
+<p>2、内容杠杆：一篇深度好文章或者一个爆款视频，可以跨越时空到达一百万人。这是目前成本最小、威力最大的杠杆。</p>
+<p>3、资本杠杆：当你有一定的积蓄之后，要学会让钱生钱。尽管它需要很高的认知能力，但是它是达到财务自由的最终途径。</p>
+<p>不要用战术上要勤奋（疯狂加班），去掩盖掉战略上要懒惰（拒绝思考杠杆），这样绝对是不行的。</p>
+<p>四、避坑指南：不要为了逃避打工而盲目创业</p>
+<p>很多人认为不想打工就去开奶茶店或者开餐厅。</p>
+<p>结果就是以前给老板打工，现在给房东、员工打工，风险全部自己承担。</p>
+<p>真正的不打工就是掌握自己生存的权利。在没有建立自己的“资产系统”之前，最明智的做法就是：</p>
+<p>保住基本盘：利用主业的资源与薪水来支撑自己的野心。</p>
+<p>开启副业实验室：不影响主业的情况下，低成本地去试一下。</p>
+<p>构建护城河：持续学习那些“带不走”的底层能力，比如营销、写作、复盘能力以及商业洞察力。</p>
+<p>五、人生最昂贵的资产就是自己的认知</p>
+<p>《纳瓦尔宝典》中有一句：获得财富不仅仅是靠勤奋，更要靠寻找能放大你努力的支点。</p>
+<p>如何一辈子不用打工？答案就是停止低层次的体力勤奋，开始高层次的认知进化。</p>
+<p>你要把经营自己的方式当成经营一家公司。你的时光、力气、才智，都是属于你的资源。你是把资源打包低价卖给雇主，还是把它们投资为可以持续产生现金流的资产？</p>
+<p>其实选择权一直都在你手里。</p>
+<p>现在这个社会，只要你善用自己就不会怀才不遇，但也不要幻想一夜暴富。从今天起，哪怕每天只花1小时，去耕耘那块属于你自己的“资产自留地”，几年之后，时间一定会给你一个惊人的答复。</p>
+<p>世界上只有一种英雄主义，就是在认清了生活的真相之后，依然选择掌控自己的命运。</p>
+<p>希望你能跳出“鼠笼折返跑”的魔咒，在这个世界上早日实现财务自由，灵魂自主。</p>
+<p>副业赚钱探索</p>
+<hr /></div>
+  <div class="card-footer"><a class="source-link" href="https://t.me/inside1024/78545)" target="_blank">查看原文</a><div class="channel-links"><a href="https://t.me/inside1024/78545">查看原文</a></div></div>
+</div>
+<div class="card">
+  <div class="card-meta">
+    <span class="channel-tag">@inside1024</span>
+    <span class="time-tag">06:41</span>
+  </div>
+  <div class="card-title"><a href="https://t.me/inside1024/78543)" target="_blank">怎样避免一辈子打工，这就是答案，打破打工循环：从认知重建到财务自由。</a></div>
+  <div class="card-summary"><p>法币超发的洪流里，贬值是必然宿命，</p>
+<p>而普通人改写命运，其实就藏在对核心资产的坚定布局中——定投黄金锚定永恒价值，</p>
+<p>配置BTC对冲通胀风险，这不是投机，而是用确定性对抗货币放水的生存智慧。</p>
+<p>放弃“靠工资抵御贬值”的幻想，把部分盈余转化为抗通胀资产，才是跳出穷忙循环的第一步。</p>
+<p>大多数兄弟对于打工的认知大都还停留在这样的层面：</p>
+<p>找一个固定的公司，每个月拿一份工资，一直干到退休。</p>
+<p>但是事实是，打工并不是一种身份，而是一种穷人思维的循环。</p>
+<p>要打破这个循环，你需要做的不是更加拼命地工作，而是对你的认知系统进行彻底的重建。</p>
+<p>一、理清现实：为什么努力不能得到自由？</p>
+<p>每天加班到深夜，但是仍然焦虑得整夜睡不着，这是为什么呢？</p>
+<p>大概率是陷入了“线性增长”的陷阱。</p>
+<p>打工就是出售自己的时间。你的一天只有24个小时，即使你的时薪翻倍，你的收入也仍然有一个非常脆弱的天花板。年龄越大，时间的价值越快消逝，这就是35岁的中年危机。</p>
+<p>如果你财富增长的速度一直受到你体力消耗速度的限制，那么你注定要一辈子打工。</p>
+<p>为了避免上述情况的发生，你必须要了解一个最基本的底层逻辑：</p>
+<p>财富不是辛苦钱的积累，而是杠杆效应的结果。</p>
+<p>二、变化：由出卖时间转为建构个人资产</p>
+<p>想停止打工，第一步不是辞职，而是要转变思维。从一个“劳动者”转变为一个“资产拥有者”。</p>
+<p>什么是资产呢？资产就是在你睡觉的时候也会给你带来收益的东西。</p>
+<p>怎样创建出睡后收入呢？以下三个方向比较容易让人入手：</p>
+<p>1、技能产品化：如果你是设计师，做一个图收一百块钱，这就叫打工。但是如果你把设计逻辑整理成一套课程，或者开发出一套模板放在平台上自动售卖，这就叫“技能产品化”。你只需要花费一次时间，就可以卖出去一百次、一千次。</p>
+<p>2、个人品牌化：在互联网时代，流量等同于数字资产。如果你在某个领域有很深的见解，并且通过写作、短视频的方式建立起个人信用，那么你便拥有了“信任杠杆”。当别人找你是因为你是谁而不是你能干活的时候，你就有议价权和溢价权了。</p>
+<p>3、复利累进化：不要忽视任何可以不断累积的小事。无论是定投优质标的、积累个人的知识库、深耕某一细分领域的圈子。打工就是“清零效应”，每天睁开眼睛都要从头开始；而资产则有“复利效应”，今天取得的成果可以作为明天起跑线上的垫脚石。</p>
+<p>三、杠杆效应：放大你的价值</p>
+<p>阿基米德说：“给我一个支点，我就能撬动地球。”</p>
+<p>普通人群体</p>
+<hr /></div>
+  <div class="card-footer"><a class="source-link" href="https://t.me/inside1024/78543)" target="_blank">查看原文</a><div class="channel-links"><a href="https://t.me/inside1024/78543">查看原文</a></div></div>
+</div>
+<div class="card">
+  <div class="card-meta">
+    <span class="channel-tag">@inside1024</span>
+    <span class="time-tag">09:49</span>
+  </div>
+  <div class="card-title"><a href="https://t.me/inside1024/78553)" target="_blank">#@inside1024</a></div>
+  <div class="card-summary"><h1>玄学碎碎念46</h1>
+<p>刷到一条短视频，那个主包组织了一场人类玄学“大师”（都很年轻）和ai的对战，共同算几个相同的命题，命理、事件、手相等等，结果好像人类“大师”不太行。</p>
+<p>不过也有可能是主包请的人不太行。</p>
+<p>我过去混老辈子玄学圈，溜过不少大会大赛。有几年环境相当宽松，这类赛事甚至可以是官方单位主办，大家的实力也真的很强。</p>
+<p>我的老师老王，六爻技术独步易坛。他年轻时候参加一场规格极高的易学大会一战成名。这种比赛规则一般全场人同算几件事，大家各显神通，扔大钱的，测式盘的，袖中掐指的，最终老王夺冠。（老王后来可谓“国师”，如今已经退休养老。）</p>
+<p>我的好友p大师，虽身有残疾，但奇人异相，更是在几场官方赛事中拿过命理状元。</p>
+<p>当然我是个菜鸡，平时在这种场合只起到挂件作用，不过廖墨香、邵伟华、王凤麟、贾双萍这些大佬也是见过面的，很多年之前也给社科联做过比较玄学擦边的公众讲座。</p>
+<p>（怎么着也比我前几天吐槽的某播客主包强多了。）</p>
+<p>只可惜后来意识形态越收越紧，官方极少出面，顶多当个文旅项目接洽承办，易学大会极速从一种充满武侠气质的切磋演变成群魔乱舞。圈里的老登还特别喜欢揩油，每次见面假意握手都要一拖二拽，烦得不行，我就只好脱圈，美美隐身了。</p>
+<hr /></div>
+  <div class="card-footer"><a class="source-link" href="https://t.me/inside1024/78553)" target="_blank">查看原文</a><div class="channel-links"><a href="https://t.me/inside1024/78553">查看原文</a></div></div>
+</div>
+<div class="card">
+  <div class="card-meta">
+    <span class="channel-tag">@inside1024</span>
+    <span class="time-tag">12:47</span>
+  </div>
+  <div class="card-title"><a href="https://t.me/inside1024/78560)" target="_blank">#@inside1024</a></div>
+  <div class="card-summary"><p>外国人MCN 是不是在赚s b 的钱？</p>
+<p>这种AI 文案侮辱老广智商。</p>
+<hr /></div>
+  <div class="card-footer"><a class="source-link" href="https://t.me/inside1024/78560)" target="_blank">查看原文</a><div class="channel-links"><a href="https://t.me/inside1024/78560">查看原文</a></div></div>
+</div>
+<div class="card">
+  <div class="card-meta">
+    <span class="channel-tag">@yunying23</span>
+    <span class="time-tag">14:25</span>
+  </div>
+  <div class="card-title"><a href="https://t.me/yunying23/9636)" target="_blank">现在到处都是 AI 就业培训班。</a></div>
+  <div class="card-summary"><p>问是，AI 一天一个样，今天学的明天就废了，能培训出什么？</p>
+<p>目前能吃上 AI 红利的，都是自己天天在折腾、在用的人。</p>
+<p>工具会变，学习力不会变。</p>
+<hr /></div>
+  <div class="card-footer"><a class="source-link" href="https://t.me/yunying23/9636)" target="_blank">查看原文</a><div class="channel-links"><a href="https://t.me/yunying23">出海赚美金</a><a href="https://t.me/meiriyishu">优质资源</a><a href="https://t.me/chunse1024/8467">优质信息</a><a href="https://t.me/inside1024">内幕消息</a><a href="https://t.me/yunying23/9636">查看原文</a></div></div>
+</div>
+<div class="card">
+  <div class="card-meta">
+    <span class="channel-tag">@yunying23</span>
+    <span class="time-tag">16:29</span>
+  </div>
+  <div class="card-title"><a href="https://t.me/yunying23/9637)" target="_blank">出海投放不行？直接牛马AI安装这个ads skill！</a></div>
+  <div class="card-summary"><p>这个 Claude skill估计能干掉一些广告代理公司了。</p>
+<p>它叫 Claude Ads，一个免费的 Claude Code skill，能跑 190 项审计检查，覆盖 Google、Meta、YouTube、LinkedIn、TikTok 和 Microsoft Ads，6 个并行子代理同时开火。</p>
+<p>一条命令，直接撕开你整个广告体系。</p>
+<p>Google 74 项检查。 Meta 46 项。</p>
+<p>所有结果汇总成一个广告健康评分，附带按收入影响排序的优先行动方案。</p>
+<p>他里面有一个 3 倍猎杀规则来帮你快速止损：</p>
+<p>任何 CPA 超出目标 3 倍的广告系列，立刻暂停。每个平台强制预算充足率检查。住房、信贷、金融、医疗的合规审查自动执行。</p>
+<p>内置 11 套行业策略模板——SaaS、电商、B2B、医疗、房地产等等。</p>
+<p>每个月花 4000 美元雇Agency投广告，真不如让CC自动化了。</p>
+<p>直接在牛马AI里，让牛马AI帮你安装，把Skill的Github贴给它，一会儿就能运行了！</p>
+<p>https://github.com/AgriciDaniel/claude-ads</p>
+<hr /></div>
+  <div class="card-footer"><a class="source-link" href="https://t.me/yunying23/9637)" target="_blank">查看原文</a><div class="channel-links"><a href="https://t.me/yunying23">出海赚美金</a><a href="https://t.me/meiriyishu">优质资源</a><a href="https://t.me/chunse1024/8467">优质信息</a><a href="https://t.me/inside1024">内幕消息</a><a href="https://t.me/yunying23/9637">查看原文</a></div></div>
+</div>
+<div class="card">
+  <div class="card-meta">
+    <span class="channel-tag">@inside1024</span>
+    <span class="time-tag">17:18</span>
+  </div>
+  <div class="card-title"><a href="https://t.me/inside1024/78568)" target="_blank">#@inside1024</a></div>
+  <div class="card-summary"><p>这就是2026年5月，腾讯元宝的AI能力么？爱了爱了</p>
+<hr /></div>
+  <div class="card-footer"><a class="source-link" href="https://t.me/inside1024/78568)" target="_blank">查看原文</a><div class="channel-links"><a href="https://t.me/inside1024/78568">查看原文</a></div></div>
+</div>
+<div class="card">
+  <div class="card-meta">
+    <span class="channel-tag">@yunying23</span>
+    <span class="time-tag">17:44</span>
+  </div>
+  <div class="card-title"><a href="https://t.me/yunying23/9638)" target="_blank">做了一个 xxx test，类似于 mbti test，这种不需要ai 服务，基本上没有什么成本，也开出来一单了</a></div>
+  <div class="card-summary"><hr /></div>
+  <div class="card-footer"><a class="source-link" href="https://t.me/yunying23/9638)" target="_blank">查看原文</a><div class="channel-links"><a href="https://t.me/yunying23/9638">查看原文</a></div></div>
+</div>
+<div class="card">
+  <div class="card-meta">
+    <span class="channel-tag">@yunying23</span>
+    <span class="time-tag">18:27</span>
+  </div>
+  <div class="card-title"><a href="https://t.me/yunying23/9641)" target="_blank">上个月开始用牛马AI服务跨境电商出海的客户</a></div>
+  <div class="card-summary"><p>我把自己的营销knowhow给了牛马AI</p>
+<p>让牛马AI去帮我做各种browser use检索获得关键上下文</p>
+<p>从而交付这个Campaign</p>
+<p>前几天做结案报告</p>
+<p>总共发20个Reddit帖子</p>
+<p>做了110.8万曝光</p>
+<p>评论区里的直接明确意向客户挖了34人进行转化</p>
+<p>过往在做Agency的 都是靠人力杠杆做服务</p>
+<p>现在容易多了 只要你有方法论 用牛马AI直接就放大</p>
+<p>几个人的小团队就能有巨大的产出</p>
+<p>这还仅仅是Reddit，SEO/GEO这些更是降维打击了</p>
+<p>掌握营销，是这个时代最重要的事情，没有之一</p>
+<hr /></div>
+  <div class="card-footer"><a class="source-link" href="https://t.me/yunying23/9641)" target="_blank">查看原文</a><div class="channel-links"><a href="https://t.me/yunying23/9641">查看原文</a></div></div>
+</div>
+<div class="card">
+  <div class="card-meta">
+    <span class="channel-tag">@inside1024</span>
+    <span class="time-tag">19:25</span>
+  </div>
+  <div class="card-title"><a href="https://t.me/inside1024/78570)" target="_blank">#@inside1024</a></div>
+  <div class="card-summary"><p>看晚点最新商稿的评论区，感受一级市场现状。刷评论才是真正 ai native 的场景。</p>
+<hr /></div>
+  <div class="card-footer"><a class="source-link" href="https://t.me/inside1024/78570)" target="_blank">查看原文</a><div class="channel-links"><a href="https://t.me/inside1024/78570">查看原文</a></div></div>
+</div>
+<div class="card">
+  <div class="card-meta">
+    <span class="channel-tag">@yunying23</span>
+    <span class="time-tag">22:16</span>
+  </div>
+  <div class="card-title"><a href="https://t.me/yunying23/9644)" target="_blank">最近不少朋友问我：AI 出海怎么真正赚钱？</a></div>
+  <div class="card-summary"><p>我总结了这半年跑下来的 6 种主流玩法</p>
+<p>1️⃣ 工具订阅制：</p>
+<p>做一个细分工具，比如 AI 报价单生成、发票助手。</p>
+<p>每月 $9.9 订阅，200 个用户就是 $2K+，稳定又复利。</p>
+<p>2️⃣ 模板/Prompt 市场：</p>
+<p>Gumroad、PromptBase 上的爆款模板日销几十份，</p>
+<p>$9.9×30=297 美金，算上自动化几乎是纯利润。</p>
+<p>3️⃣ 课程/训练营：</p>
+<p>把经验做成课。</p>
+<p>我认识一位开发者做“AI 建站课”，单期 300 人 × $199。</p>
+<p>4️⃣ 工具集成服务：</p>
+<p>用 ChatGPT + Make + Notion 做企业自动化方案。</p>
+<p>客户每月固定付 $500，1 个客户能抵你半个月工资。</p>
+<p>5️⃣ 顾问咨询：</p>
+<p>海外时薪 $100 起步，国内不到 1/5。</p>
+<p>懂落地流程 + 能讲英语，就有巨大缺口。</p>
+<p>6️⃣ 流量套利：</p>
+<p>搭建网站写 SEO 内容，用 AdSense/联盟赚点击。</p>
+<p>靠内容赚美元，现在很多团队都在批量化操作。</p>
+<p>AI 出海的本质，不是“写代码”，而是“整合价值链”。</p>
+<p>懂技术+懂市场=乘上美元汇率的复利。</p>
+<hr /></div>
+  <div class="card-footer"><a class="source-link" href="https://t.me/yunying23/9644)" target="_blank">查看原文</a><div class="channel-links"><a href="https://t.me/yunying23">出海赚美金</a><a href="https://t.me/meiriyishu">优质资源</a><a href="https://t.me/chunse1024/8467">优质信息</a><a href="https://t.me/inside1024">内幕消息</a><a href="https://t.me/yunying23/9644">查看原文</a></div></div>
+</div></div>
+
+    <div class="footer">TG 频道日报 · 自动生成</div>
+</div>
+
+</body>
+</html>

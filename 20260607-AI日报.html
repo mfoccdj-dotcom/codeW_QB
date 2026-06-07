@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>🤖 AI 日报</title>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    background: #060814;
+    color: #e8eaf0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    font-size: 15px;
+    line-height: 1.7;
+    min-height: 100vh;
+    display: flex; justify-content: center;
+}
+
+a { color: #9ecca0; text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+.main-wrap {
+    width: 100%;
+    max-width: 860px;
+    padding: 48px 40px 80px;
+}
+
+.hero {
+    padding-bottom: 36px;
+    margin-bottom: 36px;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+}
+.hero-vol { font-size: 11px; font-weight: 700; letter-spacing: 0.2em; color: #30d498; margin-bottom: 10px; }
+.hero-title { font-size: 38px; font-weight: 800; line-height: 1.15; color: #fff; margin-bottom: 10px; }
+.hero-date { font-size: 13px; color: rgba(255,255,255,0.4); margin-bottom: 16px; }
+.hero-stats { display: flex; gap: 28px; }
+.stat-item { display: flex; flex-direction: column; gap: 2px; }
+.stat-num { font-size: 22px; font-weight: 700; color: #fff; }
+.stat-label { font-size: 11px; color: rgba(255,255,255,0.35); letter-spacing: 0.08em; text-transform: uppercase; }
+
+.section { margin-bottom: 40px; }
+.section-head {
+    display: flex; align-items: baseline; gap: 12px;
+    margin-bottom: 16px; padding-bottom: 10px;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.section-num { font-size: 28px; font-weight: 800; color: #30d498; line-height: 1; }
+.section-title { font-size: 18px; font-weight: 700; color: #fff; }
+.section-count {
+    margin-left: auto; font-size: 12px; font-weight: 600; color: #6ea0ff;
+    background: rgba(110,160,255,0.12); padding: 2px 10px; border-radius: 20px;
+}
+
+.card {
+    background: rgba(255,255,255,0.025);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 10px; padding: 16px 20px; margin-bottom: 10px;
+    transition: border-color 0.2s, background 0.2s;
+}
+.card:hover { border-color: rgba(48,212,152,0.25); background: rgba(48,212,152,0.03); }
+
+.card-title {
+    font-size: 15px; font-weight: 700; color: #fff;
+    margin-bottom: 8px; line-height: 1.5;
+}
+.card-title a { color: inherit; }
+.card-title a:hover { color: #30d498; text-decoration: none; }
+
+.card-summary {
+    font-size: 14px; color: rgba(255,255,255,0.55);
+    line-height: 1.8;
+}
+.card-summary p { margin-bottom: 6px; }
+.card-summary p:last-child { margin-bottom: 0; }
+
+.card-meta { margin-top: 10px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.source-tag {
+    font-size: 11px; font-weight: 500; color: rgba(255,255,255,0.45);
+    background: rgba(255,255,255,0.06); padding: 2px 8px; border-radius: 4px;
+    white-space: nowrap;
+}
+.source-text { font-size: 11px; color: rgba(255,255,255,0.3); }
+
+pre { background: rgba(0,0,0,0.4); border-radius: 8px; padding: 16px; overflow-x: auto; font-size: 13px; }
+code { font-family: "SF Mono", Consolas, monospace; font-size: 0.88em; }
+p code { background: rgba(48,212,152,0.1); color: #7ed8a6; padding: 1px 6px; border-radius: 4px; }
+
+.footer {
+    text-align: center; font-size: 12px; color: rgba(255,255,255,0.2);
+    padding: 30px 0 20px; border-top: 1px solid rgba(255,255,255,0.05); margin-top: 20px;
+}
+
+@media (max-width: 768px) {
+    .main-wrap { padding: 28px 20px 60px; }
+    .hero-title { font-size: 26px; }
+}
+</style>
+</head>
+<body>
+
+<div class="main-wrap">
+    <div class="hero">
+        <div class="hero-vol">VOL.20260607</div>
+        <h1 class="hero-title">🤖 AI 日报</h1>
+        <div class="hero-date">2026年06月07日 · 星期日 · 3 个板块 · 13 条内容</div>
+        <div class="hero-stats">
+            <div class="stat-item"><span class="stat-num">13</span><span class="stat-label">条内容</span></div>
+            <div class="stat-item"><span class="stat-num">3</span><span class="stat-label">个板块</span></div>
+        </div>
+    </div>
+
+    <div class="section"><div class="section-head"><span class="section-num">01</span><span class="section-title">产品发布/更新</span><span class="section-count">3 条</span></div>
+<div class="card">
+  <div class="card-title"><a href="https://x.com/rohanpaul_ai/status/2063246343842501091" target="_blank">GitHub 开源 Spec Kit 工具包，用产品规范引导 AI 编码</a></div>
+  <div class="card-summary"><p>GitHub 发布开源工具包 Spec Kit，旨在解决 "vibe coding" 的最大弱点——AI 常在规则未明确时就开始编码。它把流程从 "让 AI 直接构建" 改为 "先写产品规范，再让 AI 根据规范实现"。当前 AI 编码模式常因松散提示直接跳入代码，导致需求薄弱、边界遗漏和反复返工。Spec Kit 推动反向流程：先定义产品功能，再澄清差距、制订技术计划、分解任务，最后让 agent 执行。规范成为可执行的开发合约，支持 Copilot、Claude Code、Codex、Gemini、Cursor、Qwen 等 30+ agent 集成。项目已获 109K+ 星标。</p></div>
+  <div class="card-meta"><span class="source-tag">X</span><span class="source-text">Rohan Paul (@rohanpaul_ai)</span></div>
+</div>
+<div class="card">
+  <div class="card-title"><a href="https://www.ithome.com/0/960/969.htm" target="_blank">OpenCV 5 发布：升级全新 DNN 引擎、原生支持大模型</a></div>
+  <div class="card-summary"><p>OpenCV 5 正式发布，采用基于图的 DNN 引擎，ONNX 算子覆盖率从 4.x 的不到 23% 提升至超 80%，原生支持 Transformer、视觉语言模型（VLM）和大语言模型（LLM）。其他更新包括：更好的 Python 集成与命名参数、更紧凑核心代码、清晰硬件加速层、原生 FP16/BF16、规范化 0D/1D 张量、扩展 3D 视觉及现代化文档。该库 GitHub 拥有超 86,000 stars，每日安装量超一百万次。</p></div>
+  <div class="card-meta"><span class="source-tag">IT之家（RSS）</span></div>
+</div>
+<div class="card">
+  <div class="card-title"><a href="https://huggingface.co/blog/build-small-hackathon/persona-atlas" target="_blank">Persona Atlas：Hugging Face 上的开源人物思维映射工具</a></div>
+  <div class="card-summary"><p>Persona Atlas 是一个运行在 Hugging Face Inference Providers 上的开源项目。它通过工具调用代理执行真实网络搜索，生成公众人物的资料、事实清单和风格假设，然后让该人物回答十个关于身份、伦理等开放式问题。每个回答被转化为嵌入向量，从而在向量空间中对不同人物进行距离比较，并基于十个特质锚点绘制热力图。前端采用 Gradio，提供研究、比较和检查代理完整追溯三个标签页，预设多个人物角色，无需 token 即可直接体验。</p></div>
+  <div class="card-meta"><span class="source-tag">Hugging Face</span><span class="source-text">Blog（RSS）</span></div>
+</div></div><div class="section"><div class="section-head"><span class="section-num">02</span><span class="section-title">行业动态</span><span class="section-count">5 条</span></div>
+<div class="card">
+  <div class="card-title"><a href="https://www.reuters.com/business/us-house-lawmakers-release-draft-bill-regulate-ai-2026-06-04" target="_blank">美国众议院议员发布法案草案，旨在禁止各州制定人工智能相关法规</a></div>
+  <div class="card-summary"><p>美国众议院议员发布一项法案草案，旨在禁止各州自行制定人工智能相关法规，将AI监管权力集中到联邦层面。</p></div>
+  <div class="card-meta"><span class="source-tag">Hacker News 热门（buzzing.cc 中文翻译）</span></div>
+</div>
+<div class="card">
+  <div class="card-title"><a href="https://www.cnbc.com/2026/06/05/google-to-pay-spacex-920-million-a-month-for-xai-compute-capacity.html" target="_blank">谷歌将每月向SpaceX支付9.2亿美元，以获取xAI数据中心的计算能力</a></div>
+  <div class="card-summary"><p>谷歌与SpaceX达成协议，每月支付9.2亿美元，获得位于xAI数据中心的计算能力。该交易的具体金额和合作细节于本周披露，将极大扩充谷歌的算力资源。</p></div>
+  <div class="card-meta"><span class="source-tag">Hacker News 热门（buzzing.cc 中文翻译）</span></div>
+</div>
+<div class="card">
+  <div class="card-title"><a href="https://mp.weixin.qq.com/s?__biz=MzkyNTYxNzg5Mg%3D%3D&mid=2247487873&idx=1&sn=48534d3e883573c603a58e114cbe8709" target="_blank">阶跃首席科学家张祥雨合著论文 ResNet 获 CVPR 2026 「时间检验奖」</a></div>
+  <div class="card-summary"></div>
+  <div class="card-meta"><span class="source-tag">公众号</span><span class="source-text">阶跃星辰（Step）</span></div>
+</div>
+<div class="card">
+  <div class="card-title"><a href="https://mp.weixin.qq.com/s/ZVgqdH_fE42jO4kcI-lF3g" target="_blank">阶跃首席科学家张祥雨合著论文 ResNet 获 CVPR 2026 「时间检验奖」</a></div>
+  <div class="card-summary"></div>
+  <div class="card-meta"><span class="source-tag">公众号</span><span class="source-text">阶跃星辰（Step）</span></div>
+</div>
+<div class="card">
+  <div class="card-title"><a href="https://mp.weixin.qq.com/s?__biz=MzkzNDUzMzEzNw%3D%3D&mid=2247487793&idx=1&sn=b5649b5c9c4204135b4914d89f71cb41" target="_blank">海螺AI×上影节活动日历｜请收下邀请函！</a></div>
+  <div class="card-summary"><p>MiniMax 海螺AI作为第28届上影节独家AI影像战略合作伙伴，将于6.14-6.15举办开放日活动，设AI片场专属Booth，展出四对“影视从业者+AI创作者”1+1组合的AI作品与创作过程，并设立创作体验区供现场交流。</p></div>
+  <div class="card-meta"><span class="source-tag">公众号</span><span class="source-text">MiniMax（稀宇科技）</span></div>
+</div></div><div class="section"><div class="section-head"><span class="section-num">03</span><span class="section-title">技巧与观点</span><span class="section-count">5 条</span></div>
+<div class="card">
+  <div class="card-title"><a href="https://garymarcus.substack.com/p/ais-black-friday" target="_blank">AI 的黑色星期五</a></div>
+  <div class="card-summary"><p>Gary Marcus 在文章中分享了对 AI 领域刚刚发生事件的看法，表达了对当前 AI 发展方向的思考。</p></div>
+  <div class="card-meta"><span class="source-tag">Gary Marcus</span><span class="source-text">The Road to AI We Can Trust（RSS）</span></div>
+</div>
+<div class="card">
+  <div class="card-title"><a href="https://huggingface.co/blog/build-small-hackathon/thousand-token-wood-sim-v2" target="_blank">五个实验室，五个心智：用小模型构建多模型金融剧情游戏</a></div>
+  <div class="card-summary"><p>Thousand Token Wood v2使用四个不同实验室的小模型（gpt-oss-20b、MiniCPM3-4B、Nemotron-Mini-4B及微调Qwen 0.5B）驱动金融模拟游戏的智能体。核心发现是异构服务层摩擦在于vLLM 0.22.1需CUDA工具包，而非模型本身。通过容忍性JSON解析层，添加模型只需一条配置。信息隔离确保内幕标志不在提示词中，扫描测试验证无泄露。记忆用情绪摘要截断避免淹没。微调0.5B模型实现0%自成交、100%有效报价，真相防火墙零泄露。小模型是可靠格式生成器但不可靠推理器，可通过结构化、提示词和微调弥补。</p></div>
+  <div class="card-meta"><span class="source-tag">Hugging Face</span><span class="source-text">Blog（RSS）</span></div>
+</div>
+<div class="card">
+  <div class="card-title"><a href="https://huggingface.co/blog/build-small-hackathon/job-search-blog" target="_blank">Job Searcher</a></div>
+  <div class="card-summary"><p>Hugging Face 发布 Job Searcher，一个基于 AI 的求职搜索工具。用户上传简历并设定偏好后，系统使用教师模型 DeepSeek V4 Pro 生成 LinkedIn 搜索查询，通过 JobSpy 抓取职位，再对学生模型 Qwen3-8B（8B 参数）进行 LoRA 微调，对每个职位从技能匹配、经验相关性、教育背景、行业领域契合度和资历对齐五个维度给出评分和推理。训练在 Modal 平台单张 A100 上完成。推理部署于 Hugging Face ZeroGPU Space，使用 llama.cpp 实现流式输出。项目开源。</p></div>
+  <div class="card-meta"><span class="source-tag">Hugging Face</span><span class="source-text">Blog（RSS）</span></div>
+</div>
+<div class="card">
+  <div class="card-title"><a href="https://x.com/MiniMax_AI/status/2063397618034844135" target="_blank">M3与Opus代码审计13个bug：$0.07 vs $1.30</a></div>
+  <div class="card-summary"><p>对 Claude Opus 4.8 和 MiniMax M3 进行相同的代码审计：同一代码库、同一提示词，预先植入 17 个已知 bug。MiniMax M3 以 $0.07 抓到 13 个；最便宜的 Claude 运行同样抓到 13 个，花费 $1.30。MiniMax 表示这一对比非常有趣，绝对值得一读。</p></div>
+  <div class="card-meta"><span class="source-tag">X</span><span class="source-text">MiniMax (@MiniMax_AI)</span></div>
+</div>
+<div class="card">
+  <div class="card-title"><a href="https://garymarcus.substack.com/p/no-anthropic-did-not-call-for-a-pause" target="_blank">No, Anthropic did not call for a pause on AI development</a></div>
+  <div class="card-summary"></div>
+  <div class="card-meta"><span class="source-tag">Gary Marcus</span><span class="source-text">The Road to AI We Can Trust（RSS）</span></div>
+</div></div>
+
+    <div class="footer">AI 日报 · 自动生成</div>
+</div>
+
+</body>
+</html>

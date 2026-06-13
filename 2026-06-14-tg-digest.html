@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>TG 频道日报</title>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    background: #060814;
+    color: #e8eaf0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    font-size: 15px;
+    line-height: 1.7;
+    min-height: 100vh;
+    display: flex; justify-content: center;
+}
+
+a { color: #6ea0ff; text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+.main-wrap {
+    width: 100%;
+    max-width: 860px;
+    padding: 48px 40px 80px;
+}
+
+.hero {
+    padding-bottom: 36px;
+    margin-bottom: 36px;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+}
+.hero-vol { font-size: 11px; font-weight: 700; letter-spacing: 0.2em; color: #6ea0ff; margin-bottom: 10px; }
+.hero-title { font-size: 38px; font-weight: 800; line-height: 1.15; color: #fff; margin-bottom: 10px; }
+.hero-date { font-size: 13px; color: rgba(255,255,255,0.4); margin-bottom: 16px; }
+.hero-stats { display: flex; gap: 28px; }
+.stat-item { display: flex; flex-direction: column; gap: 2px; }
+.stat-num { font-size: 22px; font-weight: 700; color: #fff; }
+.stat-label { font-size: 11px; color: rgba(255,255,255,0.35); letter-spacing: 0.08em; text-transform: uppercase; }
+
+.section { margin-bottom: 40px; }
+.section-head {
+    display: flex; align-items: baseline; gap: 16px;
+    margin-bottom: 20px; padding-bottom: 12px;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.section-num { font-size: 28px; font-weight: 800; color: rgba(255,255,255,0.25); line-height: 1; }
+.section-title { font-size: 17px; font-weight: 700; color: #fff; }
+.section-count {
+    margin-left: auto; font-size: 11px; font-weight: 600; color: #6ea0ff;
+    background: rgba(110,160,255,0.12); padding: 2px 8px; border-radius: 20px;
+}
+
+.card {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 12px; padding: 18px 22px; margin-bottom: 12px;
+    transition: border-color 0.2s, background 0.2s;
+}
+.card:hover { border-color: rgba(110,160,255,0.3); background: rgba(110,160,255,0.04); }
+
+.card-meta { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; }
+.channel-tag {
+    font-size: 12px; font-weight: 600; color: #fff;
+    background: rgba(110,160,255,0.25); padding: 2px 8px; border-radius: 20px; white-space: nowrap;
+}
+.time-tag { font-size: 12px; color: rgba(255,255,255,0.35); }
+
+.card-title {
+    font-size: 15px; font-weight: 700; color: #fff;
+    margin-bottom: 8px; line-height: 1.5;
+}
+.card-title a { color: inherit; }
+.card-title a:hover { color: #6ea0ff; text-decoration: none; }
+
+.card-summary {
+    font-size: 14px; color: rgba(255,255,255,0.6);
+    line-height: 1.8;
+}
+.card-summary p { margin-bottom: 6px; }
+.card-summary p:last-child { margin-bottom: 0; }
+
+.card-footer {
+    margin-top: 10px; display: flex; align-items: center;
+    gap: 12px; flex-wrap: wrap;
+}
+.source-link { font-size: 12px; color: rgba(255,255,255,0.35); }
+.source-link::before { content: "🔗 "; }
+.channel-links { margin-left: auto; font-size: 11px; color: rgba(255,255,255,0.25); }
+.channel-links a { color: rgba(255,255,255,0.3); margin-right: 6px; }
+.channel-links a:hover { color: #6ea0ff; }
+
+.brief-text { font-size: 15px; color: rgba(255,255,255,0.75); line-height: 1.7; }
+
+pre { background: rgba(0,0,0,0.4); border-radius: 8px; padding: 16px; overflow-x: auto; font-size: 13px; }
+code { font-family: "SF Mono", Consolas, monospace; font-size: 0.88em; }
+p code { background: rgba(110,160,255,0.1); color: #9ec5ff; padding: 1px 6px; border-radius: 4px; }
+
+.footer {
+    text-align: center; font-size: 12px; color: rgba(255,255,255,0.2);
+    padding: 30px 0 20px; border-top: 1px solid rgba(255,255,255,0.05); margin-top: 20px;
+}
+
+@media (max-width: 768px) {
+    .main-wrap { padding: 28px 20px 60px; }
+    .hero-title { font-size: 26px; }
+}
+</style>
+</head>
+<body>
+
+<div class="main-wrap">
+    <div class="hero">
+        <div class="hero-vol">VOL.20260614</div>
+        <h1 class="hero-title">TG 频道日报</h1>
+        <div class="hero-date">2026年06月14日 · 星期日 · 6 个频道 · 26 条内容</div>
+        <div class="hero-stats">
+            <div class="stat-item"><span class="stat-num">26</span><span class="stat-label">条内容</span></div>
+            <div class="stat-item"><span class="stat-num">6</span><span class="stat-label">个频道</span></div>
+        </div>
+    </div>
+
+    <div class="section"><div class="section-head"><span class="section-num">01</span><span class="section-title">TG 频道精选</span><span class="section-count">26 条</span></div>
+<div class="card">
+  <div class="card-meta">
+    <span class="channel-tag">@text1024</span>
+    <span class="time-tag">00:14</span>
+  </div>
+  <div class="card-title"><a href="https://t.me/text1024/23563)" target="_blank">今天和gpt聊了一堆近期的左右脑互搏的问题，想清楚了一些事情：</a></div>
+  <div class="card-summary"><p>1.爱自己指的是「无条件的允许事情发生，尽管儿童自我还不够好，但成人自我愿意陪同变好」</p>
+<p>2.爱自己和自私的区别在于，爱自己是将自己的感受放在第一位，感知情绪是什么，可以表达愤怒/开心，思想和行动是分离的；自私是「将自己的利益放在第一位」，所以说之前date的那个是自私 而不是爱自己</p>
+<p>3.历史上我总是很怕欠别人什么东西，总是会加倍偿还</p>
+<p>4.我妈对我的教育是「一个人不行，必须找个伴」「你不够好，你还能更好」「我是你亲妈所以只有我和你说真话」，我近期和咨询师聊到这，才意识到我是怎么形成今天的性格，以至于我一直有一个内在的批评者，永远在上班（客观上实现了温饱，但有意识的修正人格是去年刚开始）</p>
+<p>5.之前我以为我是缺爱，和gpt聊完之后指出我从不缺爱，家庭幸福，朋友也多（今天图图发那几句话我还挺感动），只是缺少被浪漫关系里坚定选择的经历</p>
+<p>6.我正处于怎样的时期呢？---奥德赛时期，奥德修斯在海上漂泊的时候也不知道终点是哪儿，就像我也不知道下半年的收入从何而来，自由职业下会不会被前同事指摘，之前维持自尊的职级、收入和面子，我很显然放弃了那些猴子们的地位游戏，但有一点奥德修斯是知道的「他已经离开了海岸」</p>
+<p>嗯，学会享受不确定性💪@圖圖TUTU</p>
+<hr /></div>
+  <div class="card-footer"><a class="source-link" href="https://t.me/text1024/23563)" target="_blank">查看原文</a><div class="channel-links"><a href="https://t.me/text1024/23563">查看原文</a></div></div>
+</div>
+<div class="card">
+  <div class="card-meta">
+    <span class="channel-tag">@yunying23</span>
+    <span class="time-tag">00:20</span>
+  </div>
+  <div class="card-title"><a href="https://t.me/yunying23/10277)" target="_blank">用 AI 写内容时，我现在会额外留一份来源台账。</a></div>
+  <div class="card-summary"><p>一段话改了三轮以后，读者只看到成品，但创作者自己很容易忘掉：这个判断来自公开资讯、自己的实操，还是临时推出来的感觉。</p>
+<p>我的做法很简单：原始来源、我为什么信它、最后怎么改成自己的判断，都先留在草稿里。发出去时不一定全写出来，但复盘和被追问时，心里有底。</p>
+<p>这也能顺手减少一种 AI 味：开头别急着写“某某说”，先讲这件事和读者有什么关系。</p>
+<p>你们用 AI 写内容时，会保留来源台账吗？</p>
+<hr /></div>
+  <div class="card-footer"><a class="source-link" href="https://t.me/yunying23/10277)" target="_blank">查看原文</a><div class="channel-links"><a href="https://t.me/yunying23/10277">查看原文</a></div></div>
+</div>
+<div class="card">
+  <div class="card-meta">
+    <span class="channel-tag">@aigc1024</span>
+    <span class="time-tag">01:36</span>
+  </div>
+  <div class="card-title"><a href="https://t.me/aigc1024/21202)" target="_blank">给编码智能体用的 HTML 技能，专门生成简洁的架构图、计划页和视觉文档。</a></div>
+  <div class="card-summary"><p>https://github.com/plannotator/effective-html</p>
+<p>effective-html 是一套给智能体用的 HTML 技能，专门做自包含的、好看的 HTML 交付物。三个子技能：html 做通用页面，html-diagram 做全屏架构图和系统图（SVG 优先），html-plan 做计划页。</p>
+<hr /></div>
+  <div class="card-footer"><a class="source-link" href="https://t.me/aigc1024/21202)" target="_blank">查看原文</a><div class="channel-links"><a href="https://t.me/aigc1024">AI探索</a><a href="https://t.me/openclaw1024">Hermes/OpenClaw</a><a href="https://t.me/meiriyishu">优质资源</a><a href="https://t.me/chunse1024/8467">优质信息</a><a href="https://t.me/aigc1024/21202">查看原文</a></div></div>
+</div>
+<div class="card">
+  <div class="card-meta">
+    <span class="channel-tag">@aigc1024</span>
+    <span class="time-tag">05:39</span>
+  </div>
+  <div class="card-title"><a href="https://t.me/aigc1024/21203)" target="_blank">我观察到身边朋友同事们的 ADHD 越来越严重了。</a></div>
+  <div class="card-summary"><p>很容易被细小琐碎的事分散注意力，</p>
+<p>反而对大问视而不见。</p>
+<p>把关掉通知，独自沉浸在一件完整的大事里，变得越来越不可能。</p>
+<p>进入心流，也变得越来越难。</p>
+<p>AI 的高速执行，还加重了这个问。</p>
+<p>每两三分钟一次的对，是一次次注意力集中和注意力涣散的交替循环。</p>
+<p>我们该如何来拯救自己的前额叶呢？</p>
+<hr /></div>
+  <div class="card-footer"><a class="source-link" href="https://t.me/aigc1024/21203)" target="_blank">查看原文</a><div class="channel-links"><a href="https://t.me/aigc1024/21203">查看原文</a></div></div>
+</div>
+<div class="card">
+  <div class="card-meta">
+    <span class="channel-tag">@aigc1024</span>
+    <span class="time-tag">06:13</span>
+  </div>
+  <div class="card-title"><a href="https://t.me/aigc1024/21205)" target="_blank">开源，免费，小米的 Code 工具来啦</a></div>
+  <div class="card-summary"><p>一开始还在好奇为啥直接开源，仔细研究发现是基于 OpenCode 改的，不过很多设计理念都很不错，把原本需要人工调教的很多方式直接集成了，有几个特色的点：</p>
+<ul>
+<li>
+<p>无限上下文，其实就是在多个 context 长度位置进行 checkpoint 总结落盘，自动压缩，用户无感知。</p>
+</li>
+<li>
+<p>任务目标多决策并发生成，最终由模型选择最优解</p>
+</li>
+<li>
+<p>goal, dynamic workflow,dream 等常见能力都实现了</p>
+</li>
+<li>
+<p>自进化，其实就是周期性基于历史 session 自动创建 skills</p>
+</li>
+</ul>
+<p>还有很多，看起来还是值得试试的，最主要开源，大家可以直接研究借鉴，很多设计理念都非常一致，看来大家都是殊途同归，btw，小米 AI 团队这几个网站的设计品味还都蛮在线的，能看到人味的存在真实非常好👍</p>
+<p>https://mimo.xiaomi.com/mimocode</p>
+<hr /></div>
+  <div class="card-footer"><a class="source-link" href="https://t.me/aigc1024/21205)" target="_blank">查看原文</a><div class="channel-links"><a href="https://t.me/aigc1024">AI探索</a><a href="https://t.me/openclaw1024">Hermes/OpenClaw</a><a href="https://t.me/meiriyishu">优质资源</a><a href="https://t.me/chunse1024/8467">优质信息</a><a href="https://t.me/aigc1024/21205">查看原文</a></div></div>
+</div>
+<div class="card">
+  <div class="card-meta">
+    <span class="channel-tag">@aigc1024</span>
+    <span class="time-tag">08:19</span>
+  </div>
+  <div class="card-title"><a href="https://t.me/aigc1024/21206)" target="_blank">今天凌晨五点的时候，我让 AI 帮我打磨一段文案，打磨三遍给我看。</a></div>
+  <div class="card-summary"><p>AI 改完之后，我发现一遍比一遍讲究，但是一遍比一遍缺人味儿。</p>
+<p>我已经用上最贵的 Claude Fable 5 了，还这样，让我很生气。</p>
+<p>最后我跟 AI说，你改完之后，人味儿变少了。</p>
+<p>我说不清什么是人味儿，只知道我感受不到文字背后的那个人了。</p>
+<p>我们讨论很久，最后讨论出的结论是，AI 写的东西，背后缺少一个东西：</p>
+<p>存在感。</p>
+<p>人写的字背后站着一个具体的人，他在具体的位置上，付出过具体的代价。</p>
+<p>然后把聊的关键信息做成了一个技能，这就是：</p>
+<p>《人味儿写作心法.skill》</p>
+<p>它特别适合自己写文章或口述后，让 AI 来改稿的场景。</p>
+<p>开源免费发布。</p>
+<p>给你的 Agent 装上它，让你的文字变得有人味儿</p>
+<p>http://github.com/orange2ai/renwei-writing</p>
+<hr /></div>
+  <div class="card-footer"><a class="source-link" href="https://t.me/aigc1024/21206)" target="_blank">查看原文</a><div class="channel-links"><a href="https://t.me/aigc1024/21206">查看原文</a></div></div>
+</div>
+<div class="card">
+  <div class="card-meta">
+    <span class="channel-tag">@aigc1024</span>
+    <span class="time-tag">09:12</span>
+  </div>
+  <div class="card-title"><a href="https://t.me/aigc1024/21208)" target="_blank">我觉得程序员跟非程序员的 Vibe Coding 的一个最大区别在于，程序员有知识储备，所以天然地会对庞大代码中的某些部分的实现抱有好奇心。</a></div>
+  <div class="card-summary"><p>我经常会这样问 Coding Agent：</p>
+<ol>
+<li>
+<p>这个 Bug 的根本原因是什么呀？以后该怎么避免呀？</p>
+</li>
+<li>
+<p>这个需求需要注意哪些细节呀？</p>
+</li>
+<li>
+<p>如果触发了这个 Edge Case 该怎么去解决呀？</p>
+</li>
+</ol>
+<p>这种自然而然的好奇心，其实并不需要消耗太多的精力（反而很有趣，因为像一本童故事书的展开一样，不失为一种娱乐活动），但它却是侧面保证软件质量的一个小小保障。也更能够去解决一些复杂系统面临的事情。</p>
+<p>也就是说，程序员本人反向成了 Coding Agent 的某一个 Skill。</p>
+<p>我称之为 steerability-skill。</p>
+<hr /></div>
+  <div class="card-footer"><a class="source-link" href="https://t.me/aigc1024/21208)" target="_blank">查看原文</a><div class="channel-links"><a href="https://t.me/aigc1024">AI探索</a><a href="https://t.me/openclaw1024">Hermes/OpenClaw</a><a href="https://t.me/meiriyishu">优质资源</a><a href="https://t.me/chunse1024/8467">优质信息</a><a href="https://t.me/aigc1024/21208">查看原文</a></div></div>
+</div>
+<div class="card">
+  <div class="card-meta">
+    <span class="channel-tag">@yunying23</span>
+    <span class="time-tag">09:17</span>
+  </div>
+  <div class="card-title"><a href="https://t.me/yunying23/10278)" target="_blank">近期大厂疯狂裁员！失业的人一定要看看！最近非常热的OPC一人公司的一套教程，免费给大家，是油管KOL Dan Koe搞的，这是未来的趋势，必读！</a></div>
+  <div class="card-summary"><p>链接：https://pan.quark.cn/s/50b30cd48861</p>
+<hr /></div>
+  <div class="card-footer"><a class="source-link" href="https://t.me/yunying23/10278)" target="_blank">查看原文</a><div class="channel-links"><a href="https://t.me/yunying23">出海赚美金</a><a href="https://t.me/meiriyishu">优质资源</a><a href="https://t.me/chunse1024/8467">优质信息</a><a href="https://t.me/inside1024">内幕消息</a><a href="https://t.me/yunying23/10278">查看原文</a></div></div>
+</div>
+<div class="card">
+  <div class="card-meta">
+    <span class="channel-tag">@inside1024</span>
+    <span class="time-tag">10:12</span>
+  </div>
+  <div class="card-title"><a href="https://t.me/inside1024/80216)" target="_blank">人是需求的集合</a></div>
+  <div class="card-summary"><p>生意场上，</p>
+<p>对产品、服务的抱怨与不满是需求</p>
+<p>职场、官场、情场上，</p>
+<p>一个眼神、一个动作、一个微表情，</p>
+<p>那些难以启齿的隐晦表达，</p>
+<p>都是深层的需求在作祟。</p>
+<p>真正做过生意的人，才能深刻体会到：</p>
+<p>人性就是需求，</p>
+<p>满足需求才是根本。</p>
+<p>人是动物，</p>
+<p>是需求的载体，人从不特殊。</p>
+<p>这个世界没有绝对独一无二的人，</p>
+<p>只有由不同需求组合而成的群体。</p>
+<p>理解需求，</p>
+<p>是所有人际关系和商业关系的基础。</p>
+<p>自媒体/出海经验/赚美金/运营技巧</p>
+<hr /></div>
+  <div class="card-footer"><a class="source-link" href="https://t.me/inside1024/80216)" target="_blank">查看原文</a><div class="channel-links"><a href="https://t.me/inside1024/80216">查看原文</a></div></div>
+</div>
+<div class="card">
+  <div class="card-meta">
+    <span class="channel-tag">@inside1024</span>
+    <span class="time-tag">10:25</span>
+  </div>
+  <div class="card-title"><a href="https://t.me/inside1024/80218)" target="_blank">情绪是什么？OpenAI 前首席科学家 Ilya Sutskever 在访谈中提到的一个案例让我有了新的理解。</a></div>
+  <div class="card-summary"><p>有个人因为脑损伤失去了所有情绪：不悲伤、不愤怒、不兴奋。听起来像是进入了一种令人羡慕的“纯理性”状态，可以做出非常理性的决定。</p>
+<p>但结果恰恰相反：跟情绪一起消失的，还有他的决策能力。他选袜子要花几小时，炒股更是亏得裤衩都没了，尽管他的智力测试完全正常。</p>
+<p>原因也很简单：情绪不仅仅是心情，它本质上是大脑的一套“价值函数”。</p>
+<p>进化给人类装了这套系统，让我们能快速评估“这个好不好”、“值不值得”，不用每件小事都从头推理。失去情绪，就是失去了这个内置的评估器。</p>
+<p>这正是 Ilya 认为现在的大模型缺少的东西。大模型通过预训练获得了知识和推理能力，但缺少类似的内置价值系统。</p>
+<p>所以才会出现这种情况：AI 在编程竞赛表现上面有超人的表现，实际写代码却反复犯下低级的错误。知识有了，但“这样写感觉不对”的直觉，还没有。</p>
+<p>私人优质信息收藏夹</p>
+<hr /></div>
+  <div class="card-footer"><a class="source-link" href="https://t.me/inside1024/80218)" target="_blank">查看原文</a><div class="channel-links"><a href="https://t.me/inside1024/80218">查看原文</a></div></div>
+</div>
+<div class="card">
+  <div class="card-meta">
+    <span class="channel-tag">@aigc1024</span>
+    <span class="time-tag">11:16</span>
+  </div>
+  <div class="card-title"><a href="https://t.me/aigc1024/21209)" target="_blank">兄弟们，</a></div>
+  <div class="card-summary"><p>现在AI视频是越来越强了🥳</p>
+<p>这要不是AI脸看多了，</p>
+<p>这皮肤质感很难看出是AI生成的。</p>
+<hr /></div>
+  <div class="card-footer"><a class="source-link" href="https://t.me/aigc1024/21209)" target="_blank">查看原文</a><div class="channel-links"><a href="https://t.me/aigc1024">AI探索</a><a href="https://t.me/openclaw1024">Hermes/OpenClaw</a><a href="https://t.me/meiriyishu">优质资源</a><a href="https://t.me/chunse1024/8467">优质信息</a><a href="https://t.me/aigc1024/21209">查看原文</a></div></div>
+</div>
+<div class="card">
+  <div class="card-meta">
+    <span class="channel-tag">@chunse1024</span>
+    <span class="time-tag">11:43</span>
+  </div>
+  <div class="card-title"><a href="https://t.me/chunse1024/10747)" target="_blank">偶尔需要远程控制家里的电脑，或者帮朋友解决技术问，用一些商业远程工具虽然方便，但各种连接限制，有时真的有点烦。</a></div>
+  <div class="card-summary"><p>无独有偶，在 GitHub 上发现 CrossDesk 这款开源的远程桌面软件，它最大的亮点是支持 Web 端，在浏览器上就能控制远程设备。</p>
+<p>并且具备了实时音频传输、网络透传、视频软硬编解码、音频编解码、传输加密等基础能力。</p>
+<p>GitHub：http://github.com/kunkundi/crossdesk</p>
+<p>同时支持 Windows、macOS 和 Linux 系统，轻量化的设计，资源占用低、运行速度快。</p>
+<p>除此之外，还支持 Docker 部署自托管，所有数据和连接更加安全放心。</p>
+<p>提供了开箱即用的安装包，可在项目的发布页面下载，还有详细的使用教程。</p>
+<hr /></div>
+  <div class="card-footer"><a class="source-link" href="https://t.me/chunse1024/10747)" target="_blank">查看原文</a><div class="channel-links"><a href="https://t.me/chunse1024">优质「内容」</a><a href="https://t.me/meiriyishu">优质「资源」</a><a href="https://t.me/inside1024">你不知道的内幕消息🌳</a><a href="https://t.me/chunse1024/10747">查看原文</a></div></div>
+</div>
+<div class="card">
+  <div class="card-meta">
+    <span class="channel-tag">@text1024</span>
+    <span class="time-tag">11:43</span>
+  </div>
+  <div class="card-title"><a href="https://t.me/text1024/23571)" target="_blank">赚钱的第一性原理是什么？创造价值-解决问-满足需求，而非出卖时间、付出劳动。一旦确认了，那就是快速迭代+系统复制+杠杆。最后结论上杠杆，用正收益系统，干金融衍生品？只有一句：别人(或市场)愿意为你创造的价值买单x你能触达/影响的人数x放大倍数(杠杆)。绝大多数人卡在最前面那部分，少数人卡在中间，真正拉开差距的，往往是最后那个“放大倍数”。</a></div>
+  <div class="card-summary"><p>拆解链条来表达(从表象 →本质 →更底层)：1. 赚钱的第一性原理。→创造别人愿意付费的价值(而不是我很努力/我很辛苦)；2.创造价值的第一性原理。→真正解决别人的痛点/痒点/爽点(不是我觉得这东西很好)；3. 解决痛点的第一性原理。 →准确识别真需求(而不是自我感动)；4. 放大规模的第一性原理。→用杠杆代替出卖时间(代码、媒体、组织、资本、系统、品牌、网络效应、平台、复购、自动化…)</p>
+<p>最主要的：持续赚钱的第一性原理。</p>
+<p>→构建可复制、可规模化、可防御的价值生产系统(一旦系统跑通，边际成本趋近于零，收入却可以指数级增长)。绝大多数普通人停留在第1-2层，一辈子都是时间 × 技能单价的线性交易。能赚到“还不错”收入的人，通常已经到了第3-4层，开始用系统/产品/流量/团队代替自己亲自干活。真正拉开天花板的人(年入千万-亿级)，几乎都在第4-5层玩复利杠杆+网络效应+稀缺心智占位。</p>
+<p>赚钱本质不是“卖力气”，而是“卖确定性 × 卖规模 × 卖杠杆”。</p>
+<hr /></div>
+  <div class="card-footer"><a class="source-link" href="https://t.me/text1024/23571)" target="_blank">查看原文</a><div class="channel-links"><a href="https://t.me/text1024">副业搞钱</a><a href="https://t.me/yunying23">出海赚美金</a><a href="https://t.me/inside1024">内幕消息</a><a href="https://t.me/chunse1024">优质内容</a><a href="https://t.me/text1024/23571">查看原文</a></div></div>
+</div>
+<div class="card">
+  <div class="card-meta">
+    <span class="channel-tag">@aigc1024</span>
+    <span class="time-tag">13:39</span>
+  </div>
+  <div class="card-title"><a href="https://t.me/aigc1024/21212)" target="_blank">今天凌晨五点的时候，我让 AI 帮我打磨一段文案，打磨三遍给我看。</a></div>
+  <div class="card-summary"><p>AI 改完之后，我发现一遍比一遍讲究，但是一遍比一遍缺人味儿。</p>
+<p>我已经用上最贵的 Claude Fable 5 了，还这样，让我很生气。</p>
+<p>最后我跟 AI说，你改完之后，人味儿变少了。</p>
+<p>我说不清什么是人味儿，只知道我感受不到文字背后的那个人了。</p>
+<p>我们讨论很久，最后讨论出的结论是，AI 写的东西，背后缺少一个东西：</p>
+<p>存在感。</p>
+<p>人写的字背后站着一个具体的人，他在具体的位置上，付出过具体的代价。</p>
+<p>然后把聊的关键信息做成了一个技能，这就是：</p>
+<p>《人味儿写作心法.skill》</p>
+<p>它特别适合自己写文章或口述后，让 AI 来改稿的场景。</p>
+<p>开源免费发布。</p>
+<p>给你的 Agent 装上它，让你的文字变得有人味儿</p>
+<p>http://github.com/orange2ai/renwei-writing</p>
+<hr /></div>
+  <div class="card-footer"><a class="source-link" href="https://t.me/aigc1024/21212)" target="_blank">查看原文</a><div class="channel-links"><a href="https://t.me/aigc1024/21212">查看原文</a></div></div>
+</div>
+<div class="card">
+  <div class="card-meta">
+    <span class="channel-tag">@meiriyishu</span>
+    <span class="time-tag">13:43</span>
+  </div>
+  <div class="card-title"><a href="https://t.me/meiriyishu/1337)" target="_blank">外网爆火：1.7亿人疯传，油管大神Dan Koe的万字长文</a></div>
+  <div class="card-summary"><p>如何在一天内彻底改变你的人生【中英文翻译版】</p>
+<p>————</p>
+<hr /></div>
+  <div class="card-footer"><a class="source-link" href="https://t.me/meiriyishu/1337)" target="_blank">查看原文</a><div class="channel-links"><a href="https://t.me/meiriyishu">优质资源</a><a href="https://t.me/chunse1024/8467">优质内容</a><a href="https://t.me/inside1024">内幕消息</a><a href="https://t.me/meiriyishu/1337">查看原文</a></div></div>
+</div>
+<div class="card">
+  <div class="card-meta">
+    <span class="channel-tag">@yunying23</span>
+    <span class="time-tag">14:19</span>
+  </div>
+  <div class="card-title"><a href="https://t.me/yunying23/10282)" target="_blank">我懒得每天刷十几个老外的推特，于是让 Grok 替我盯，每天一封邮件送上门。</a></div>
+  <div class="card-summary"><p>Google SEO 半夜更新算法，海外大神当天拆解，你一周后才从公众号看到。</p>
+<p>我是这样操作的：</p>
+<p>https://mp.weixin.qq.com/s/cZGmqWp0pXse26U209NMww</p>
+<p>👆</p>
+<hr /></div>
+  <div class="card-footer"><a class="source-link" href="https://t.me/yunying23/10282)" target="_blank">查看原文</a><div class="channel-links"><a href="https://t.me/yunying23/10282">查看原文</a></div></div>
+</div>
+<div class="card">
+  <div class="card-meta">
+    <span class="channel-tag">@chunse1024</span>
+    <span class="time-tag">14:50</span>
+  </div>
+  <div class="card-title"><a href="https://t.me/chunse1024/10749)" target="_blank">[这可能是目前 Obsidian 生态中最好用的 LLM-Wiki 插件了——Karpathy LLM Wiki](https://mp.weixin.qq.com/s/PoUhIG2Yg5ZCBfK_AdeO2Q)</a></div>
+  <div class="card-summary"><p>有热爱知识管理或记笔记、</p>
+<p>Obsidian重度用户、</p>
+<p>散落在各家AI工具里有价值的聊天记录，但苦于难于整理的用户、</p>
+<p>想实践LLM Wiki理念的小伙伴看过来哈🥳~</p>
+<p>推荐一个神器工具：Karpathy LLM-Wiki</p>
+<hr /></div>
+  <div class="card-footer"><a class="source-link" href="https://t.me/chunse1024/10749)" target="_blank">查看原文</a><div class="channel-links"><a href="https://t.me/chunse1024/10749">查看原文</a></div></div>
+</div>
+<div class="card">
+  <div class="card-meta">
+    <span class="channel-tag">@yunying23</span>
+    <span class="time-tag">16:17</span>
+  </div>
+  <div class="card-title"><a href="https://t.me/yunying23/10287)" target="_blank">**【000体育】U投首选平台|实力认证 |值得信赖</a></div>
+  <div class="card-summary"><p><strong><em>*🙂‍↕️</em></strong><em>😜</em><strong><em>😘</em></strong><em>🔤</em><strong><em>🔤</em></strong><em>😀</em><strong><em>🤩</em></strong><em>💎</em><strong><em>😆</em></strong><em>🤩</em><strong><em>🔤</em></strong><em>🤩</em><strong><em>🤩</em></strong><em>🤩</em>***</p>
+<p><strong><em>*⚽️</em></strong><em> 官方网址：  </em><em><a href="http://000uuuu.com/308"><strong>000.com</strong></a></em>*</p>
+<p><strong><em>*🏆</em></strong><em> 2026美加墨世界杯即将震撼开赛</em><strong><em>❗️</em></strong>*</p>
+<p>48支豪强齐聚</p>
+<p>104场巅峰大战</p>
+<p>谁将捧起大力神杯<strong><em>*❓</em></strong>*</p>
+<p>边看边聊，神仙预测等你来战<strong><em>*❗️</em></strong>*</p>
+<p>免费观看世界杯直播： <strong><a href="https://down.000zb01.com/?agent=1&amp;app=daili308"><strong>000.live</strong></a></strong></p>
+<p><strong><em>*⚽️</em></strong>* 世界杯期间</p>
+<p><strong><em>*🙂‍↕️</em></strong><em>😜</em><strong><em>😘</em></strong><em>🔤</em><strong><em>🔤</em></strong><em>😀</em><strong><em>🤩</em></strong>* 为广大球迷准备海量福利</p>
+<p><strong><em>*🥇</em></strong>*</p>
+<p>🎁 新人六重豪礼</p>
+<p>💎 代理八重扶持</p>
+<p>⚽️ 全球热门赛事覆盖</p>
+<p>🎉 每日专属优惠活动</p>
+<p><strong><em>*🥈</em></strong>*</p>
+<p><strong><em>*💵</em></strong>* 娱乐返水最高1.10%</p>
+<p><strong><em>*➡️</em></strong>* YGG电子单注最高20,000+</p>
+<p><strong><em>*🎅</em></strong>*  新人专享礼包可领10,000USDT</p>
+<p>平台特色：<strong><em>*🇧🇷</em></strong><em>3️⃣</em><strong><em>🤩</em></strong><em>4️⃣</em><strong><em>😘</em></strong><em>🙃</em><strong><em>4️⃣</em></strong><em>4️⃣</em><strong><em>3️⃣</em></strong><em>3️⃣</em><strong><em>4️⃣</em></strong><em>4️⃣</em>***</p>
+<p><strong><em>*⭐️</em></strong>* 无需实名</p>
+<p><strong><em>*⭐️</em></strong>* 无需绑卡</p>
+<p><strong><em>*⭐️</em></strong>* 不限IP</p>
+<p><strong><em>*⭐️</em></strong>* USDT安全存取</p>
+<p><strong><em>*⭐️</em></strong>* 高额限红，畅享激情</p>
+<p>零延迟高清直播，每一次射门都尽收眼底：<strong><a href="https://down.000zb01.com/?agent=1&amp;app=daili308"><strong>000.live</strong></a></strong></p>
+<p><strong><em>*💬</em></strong><em>申请客服：</em><strong><em>@TY000KF</em></strong>*</p>
+<p><strong><em>*🖥</em></strong><em>官方频道:   </em><strong><em>@TY000com</em></strong>*</p>
+<p><strong><em>*📎</em></strong><em>官方飞投：</em><strong><em>@ty000com_bot</em></strong>*</p>
+<p><strong><em>*🔗</em></strong><em>官方网址:  </em>*<a href="http://000uuuu.com/308">** 000.com**</a></p>
+<p>🔥 世界杯狂欢，从这里开始！</p>
+<hr /></div>
+  <div class="card-footer"><a class="source-link" href="https://t.me/yunying23/10287)" target="_blank">查看原文</a><div class="channel-links"><a href="https://t.me/yunying23/10287">查看原文</a></div></div>
+</div>
+<div class="card">
+  <div class="card-meta">
+    <span class="channel-tag">@aigc1024</span>
+    <span class="time-tag">16:17</span>
+  </div>
+  <div class="card-title"><a href="https://t.me/aigc1024/21214)" target="_blank">**【000体育】U投首选平台|实力认证 |值得信赖</a></div>
+  <div class="card-summary"><p><strong><em>*🙂‍↕️</em></strong><em>😜</em><strong><em>😘</em></strong><em>🔤</em><strong><em>🔤</em></strong><em>😀</em><strong><em>🤩</em></strong><em>💎</em><strong><em>😆</em></strong><em>🤩</em><strong><em>🔤</em></strong><em>🤩</em><strong><em>🤩</em></strong><em>🤩</em>***</p>
+<p><strong><em>*⚽️</em></strong><em> 官方网址：  </em><em><a href="http://000uuuu.com/308"><strong>000.com</strong></a></em>*</p>
+<p><strong><em>*🏆</em></strong><em> 2026美加墨世界杯即将震撼开赛</em><strong><em>❗️</em></strong>*</p>
+<p>48支豪强齐聚</p>
+<p>104场巅峰大战</p>
+<p>谁将捧起大力神杯<strong><em>*❓</em></strong>*</p>
+<p>边看边聊，神仙预测等你来战<strong><em>*❗️</em></strong>*</p>
+<p>免费观看世界杯直播： <strong><a href="https://down.000zb01.com/?agent=1&amp;app=daili308"><strong>000.live</strong></a></strong></p>
+<p><strong><em>*⚽️</em></strong>* 世界杯期间</p>
+<p><strong><em>*🙂‍↕️</em></strong><em>😜</em><strong><em>😘</em></strong><em>🔤</em><strong><em>🔤</em></strong><em>😀</em><strong><em>🤩</em></strong>* 为广大球迷准备海量福利</p>
+<p><strong><em>*🥇</em></strong>*</p>
+<p>🎁 新人六重豪礼</p>
+<p>💎 代理八重扶持</p>
+<p>⚽️ 全球热门赛事覆盖</p>
+<p>🎉 每日专属优惠活动</p>
+<p><strong><em>*🥈</em></strong>*</p>
+<p><strong><em>*💵</em></strong>* 娱乐返水最高1.10%</p>
+<p><strong><em>*➡️</em></strong>* YGG电子单注最高20,000+</p>
+<p><strong><em>*🎅</em></strong>*  新人专享礼包可领10,000USDT</p>
+<p>平台特色：<strong><em>*🇧🇷</em></strong><em>3️⃣</em><strong><em>🤩</em></strong><em>4️⃣</em><strong><em>😘</em></strong><em>🙃</em><strong><em>4️⃣</em></strong><em>4️⃣</em><strong><em>3️⃣</em></strong><em>3️⃣</em><strong><em>4️⃣</em></strong><em>4️⃣</em>***</p>
+<p><strong><em>*⭐️</em></strong>* 无需实名</p>
+<p><strong><em>*⭐️</em></strong>* 无需绑卡</p>
+<p><strong><em>*⭐️</em></strong>* 不限IP</p>
+<p><strong><em>*⭐️</em></strong>* USDT安全存取</p>
+<p><strong><em>*⭐️</em></strong>* 高额限红，畅享激情</p>
+<p>零延迟高清直播，每一次射门都尽收眼底：<strong><a href="https://down.000zb01.com/?agent=1&amp;app=daili308"><strong>000.live</strong></a></strong></p>
+<p><strong><em>*💬</em></strong><em>申请客服：</em><strong><em>@TY000KF</em></strong>*</p>
+<p><strong><em>*🖥</em></strong><em>官方频道:   </em><strong><em>@TY000com</em></strong>*</p>
+<p><strong><em>*📎</em></strong><em>官方飞投：</em><strong><em>@ty000com_bot</em></strong>*</p>
+<p><strong><em>*🔗</em></strong><em>官方网址:  </em>*<a href="http://000uuuu.com/308">** 000.com**</a></p>
+<p>🔥 世界杯狂欢，从这里开始！</p>
+<hr /></div>
+  <div class="card-footer"><a class="source-link" href="https://t.me/aigc1024/21214)" target="_blank">查看原文</a><div class="channel-links"><a href="https://t.me/aigc1024/21214">查看原文</a></div></div>
+</div>
+<div class="card">
+  <div class="card-meta">
+    <span class="channel-tag">@text1024</span>
+    <span class="time-tag">16:17</span>
+  </div>
+  <div class="card-title"><a href="https://t.me/text1024/23573)" target="_blank">**【000体育】U投首选平台|实力认证 |值得信赖</a></div>
+  <div class="card-summary"><p><strong><em>*🙂‍↕️</em></strong><em>😜</em><strong><em>😘</em></strong><em>🔤</em><strong><em>🔤</em></strong><em>😀</em><strong><em>🤩</em></strong><em>💎</em><strong><em>😆</em></strong><em>🤩</em><strong><em>🔤</em></strong><em>🤩</em><strong><em>🤩</em></strong><em>🤩</em>***</p>
+<p><strong><em>*⚽️</em></strong><em> 官方网址：  </em><em><a href="http://000uuuu.com/308"><strong>000.com</strong></a></em>*</p>
+<p><strong><em>*🏆</em></strong><em> 2026美加墨世界杯即将震撼开赛</em><strong><em>❗️</em></strong>*</p>
+<p>48支豪强齐聚</p>
+<p>104场巅峰大战</p>
+<p>谁将捧起大力神杯<strong><em>*❓</em></strong>*</p>
+<p>边看边聊，神仙预测等你来战<strong><em>*❗️</em></strong>*</p>
+<p>免费观看世界杯直播： <strong><a href="https://down.000zb01.com/?agent=1&amp;app=daili308"><strong>000.live</strong></a></strong></p>
+<p><strong><em>*⚽️</em></strong>* 世界杯期间</p>
+<p><strong><em>*🙂‍↕️</em></strong><em>😜</em><strong><em>😘</em></strong><em>🔤</em><strong><em>🔤</em></strong><em>😀</em><strong><em>🤩</em></strong>* 为广大球迷准备海量福利</p>
+<p><strong><em>*🥇</em></strong>*</p>
+<p>🎁 新人六重豪礼</p>
+<p>💎 代理八重扶持</p>
+<p>⚽️ 全球热门赛事覆盖</p>
+<p>🎉 每日专属优惠活动</p>
+<p><strong><em>*🥈</em></strong>*</p>
+<p><strong><em>*💵</em></strong>* 娱乐返水最高1.10%</p>
+<p><strong><em>*➡️</em></strong>* YGG电子单注最高20,000+</p>
+<p><strong><em>*🎅</em></strong>*  新人专享礼包可领10,000USDT</p>
+<p>平台特色：<strong><em>*🇧🇷</em></strong><em>3️⃣</em><strong><em>🤩</em></strong><em>4️⃣</em><strong><em>😘</em></strong><em>🙃</em><strong><em>4️⃣</em></strong><em>4️⃣</em><strong><em>3️⃣</em></strong><em>3️⃣</em><strong><em>4️⃣</em></strong><em>4️⃣</em>***</p>
+<p><strong><em>*⭐️</em></strong>* 无需实名</p>
+<p><strong><em>*⭐️</em></strong>* 无需绑卡</p>
+<p><strong><em>*⭐️</em></strong>* 不限IP</p>
+<p><strong><em>*⭐️</em></strong>* USDT安全存取</p>
+<p><strong><em>*⭐️</em></strong>* 高额限红，畅享激情</p>
+<p>零延迟高清直播，每一次射门都尽收眼底：<strong><a href="https://down.000zb01.com/?agent=1&amp;app=daili308"><strong>000.live</strong></a></strong></p>
+<p><strong><em>*💬</em></strong><em>申请客服：</em><strong><em>@TY000KF</em></strong>*</p>
+<p><strong><em>*🖥</em></strong><em>官方频道:   </em><strong><em>@TY000com</em></strong>*</p>
+<p><strong><em>*📎</em></strong><em>官方飞投：</em><strong><em>@ty000com_bot</em></strong>*</p>
+<p><strong><em>*🔗</em></strong><em>官方网址:  </em>*<a href="http://000uuuu.com/308">** 000.com**</a></p>
+<p>🔥 世界杯狂欢，从这里开始！</p>
+<hr /></div>
+  <div class="card-footer"><a class="source-link" href="https://t.me/text1024/23573)" target="_blank">查看原文</a><div class="channel-links"><a href="https://t.me/text1024/23573">查看原文</a></div></div>
+</div>
+<div class="card">
+  <div class="card-meta">
+    <span class="channel-tag">@inside1024</span>
+    <span class="time-tag">16:17</span>
+  </div>
+  <div class="card-title"><a href="https://t.me/inside1024/80229)" target="_blank">**【000体育】U投首选平台|实力认证 |值得信赖</a></div>
+  <div class="card-summary"><p><strong><em>*🙂‍↕️</em></strong><em>😜</em><strong><em>😘</em></strong><em>🔤</em><strong><em>🔤</em></strong><em>😀</em><strong><em>🤩</em></strong><em>💎</em><strong><em>😆</em></strong><em>🤩</em><strong><em>🔤</em></strong><em>🤩</em><strong><em>🤩</em></strong><em>🤩</em>***</p>
+<p><strong><em>*⚽️</em></strong><em> 官方网址：  </em><em><a href="http://000uuuu.com/308"><strong>000.com</strong></a></em>*</p>
+<p><strong><em>*🏆</em></strong><em> 2026美加墨世界杯即将震撼开赛</em><strong><em>❗️</em></strong>*</p>
+<p>48支豪强齐聚</p>
+<p>104场巅峰大战</p>
+<p>谁将捧起大力神杯<strong><em>*❓</em></strong>*</p>
+<p>边看边聊，神仙预测等你来战<strong><em>*❗️</em></strong>*</p>
+<p>免费观看世界杯直播： <strong><a href="https://down.000zb01.com/?agent=1&amp;app=daili308"><strong>000.live</strong></a></strong></p>
+<p><strong><em>*⚽️</em></strong>* 世界杯期间</p>
+<p><strong><em>*🙂‍↕️</em></strong><em>😜</em><strong><em>😘</em></strong><em>🔤</em><strong><em>🔤</em></strong><em>😀</em><strong><em>🤩</em></strong>* 为广大球迷准备海量福利</p>
+<p><strong><em>*🥇</em></strong>*</p>
+<p>🎁 新人六重豪礼</p>
+<p>💎 代理八重扶持</p>
+<p>⚽️ 全球热门赛事覆盖</p>
+<p>🎉 每日专属优惠活动</p>
+<p><strong><em>*🥈</em></strong>*</p>
+<p><strong><em>*💵</em></strong>* 娱乐返水最高1.10%</p>
+<p><strong><em>*➡️</em></strong>* YGG电子单注最高20,000+</p>
+<p><strong><em>*🎅</em></strong>*  新人专享礼包可领10,000USDT</p>
+<p>平台特色：<strong><em>*🇧🇷</em></strong><em>3️⃣</em><strong><em>🤩</em></strong><em>4️⃣</em><strong><em>😘</em></strong><em>🙃</em><strong><em>4️⃣</em></strong><em>4️⃣</em><strong><em>3️⃣</em></strong><em>3️⃣</em><strong><em>4️⃣</em></strong><em>4️⃣</em>***</p>
+<p><strong><em>*⭐️</em></strong>* 无需实名</p>
+<p><strong><em>*⭐️</em></strong>* 无需绑卡</p>
+<p><strong><em>*⭐️</em></strong>* 不限IP</p>
+<p><strong><em>*⭐️</em></strong>* USDT安全存取</p>
+<p><strong><em>*⭐️</em></strong>* 高额限红，畅享激情</p>
+<p>零延迟高清直播，每一次射门都尽收眼底：<strong><a href="https://down.000zb01.com/?agent=1&amp;app=daili308"><strong>000.live</strong></a></strong></p>
+<p><strong><em>*💬</em></strong><em>申请客服：</em><strong><em>@TY000KF</em></strong>*</p>
+<p><strong><em>*🖥</em></strong><em>官方频道:   </em><strong><em>@TY000com</em></strong>*</p>
+<p><strong><em>*📎</em></strong><em>官方飞投：</em><strong><em>@ty000com_bot</em></strong>*</p>
+<p><strong><em>*🔗</em></strong><em>官方网址:  </em>*<a href="http://000uuuu.com/308">** 000.com**</a></p>
+<p>🔥 世界杯狂欢，从这里开始！</p>
+<hr /></div>
+  <div class="card-footer"><a class="source-link" href="https://t.me/inside1024/80229)" target="_blank">查看原文</a><div class="channel-links"><a href="https://t.me/inside1024/80229">查看原文</a></div></div>
+</div>
+<div class="card">
+  <div class="card-meta">
+    <span class="channel-tag">@yunying23</span>
+    <span class="time-tag">16:29</span>
+  </div>
+  <div class="card-title"><a href="https://t.me/yunying23/10288)" target="_blank">我去，这都行？！</a></div>
+  <div class="card-summary"><p>这个账号就两个作品，14万点赞，5万粉丝，有点离谱了。不用自己上台演脱口秀，AI直接搞定，那观众捧场跟真的似的😂</p>
+<p>选选的也好，情绪价值正戳广大女性网友心窝子啊。</p>
+<p>我都想自己开干了，搞定选和脱口秀段子，就成功了一大半！</p>
+<hr /></div>
+  <div class="card-footer"><a class="source-link" href="https://t.me/yunying23/10288)" target="_blank">查看原文</a><div class="channel-links"><a href="https://t.me/yunying23">出海赚美金</a><a href="https://t.me/meiriyishu">优质资源</a><a href="https://t.me/chunse1024/8467">优质信息</a><a href="https://t.me/inside1024">内幕消息</a><a href="https://t.me/yunying23/10288">查看原文</a></div></div>
+</div>
+<div class="card">
+  <div class="card-meta">
+    <span class="channel-tag">@aigc1024</span>
+    <span class="time-tag">17:39</span>
+  </div>
+  <div class="card-title"><a href="https://t.me/aigc1024/21216)" target="_blank">今天 GitHub 被 Agent 军团彻底攻占了🔥</a></div>
+  <div class="card-summary"><p>不是夸张说法，今天 GitHub 热榜前几全被 Agent 和 CLI 基础设施包揽，星标增长速度我看了都有点慌。</p>
+<p>给你拆解 5 个今天最猛的项目：</p>
+<p>1️⃣ openhuman（tinyhumansai）</p>
+<p>私人超级 AI 智能体，Rust 编写，完全私有化部署，日常事务到复杂工作流全包。以前 ChatGPT 就是个聊天窗口，这玩意儿是真正跑在你本地的随身助理。今天单日暴增 3k+ 星，私人 AI 时代不是要来了，是已经来了。</p>
+<p>2️⃣ CLI-Anything（HKUDS）</p>
+<p>口号是"让所有软件都具备 Agent 原生能力"，意思是可以把任意命令行工具变成 AI 能直接调用的技能。Agent 终于能真正掌控你的终端和整套工具链了，开发者和自动化党看到这个应该懂我在说什么。今天 1k+ 星，CLI 革命这回是动真格的了。</p>
+<p>3️⃣ academic-research-skills（Imbad0202）</p>
+<p>专为 Claude Code 打造的学术研究技能包，research→write→review→revise→finalize，整条科研流水线直接自动化跑通。写论文写报告的朋友，这东西都出来了你还在一层层手动搞？今天暴增 3k+ 星，学术圈要大地震了。</p>
+<p>4️⃣ superpowers（obra）</p>
+<p>这个不只是工具，而是一套 Agent 技能框架加软件开发方法论。说白了就是教你怎么系统性地把 Agent 用好，不是给你一堆提示词就完事，而是真正的底层打法。今天 1.6k+ 星，老鸟必备，新手更该看。</p>
+<p>5️⃣ agentmemory（rohitg00）</p>
+<p>AI 编码 Agent 的持久化记忆方案，基于真实基准测试优化出来的。Agent 最大的硬伤就是没有记忆，长任务跑着跑着就丢了上下文，这个项目就是专门来补这个坑的。今天 1.6k+ 星，编码 Agent 基础设施这一环终于补上了。</p>
+<hr /></div>
+  <div class="card-footer"><a class="source-link" href="https://t.me/aigc1024/21216)" target="_blank">查看原文</a><div class="channel-links"><a href="https://t.me/aigc1024/21216">查看原文</a></div></div>
+</div>
+<div class="card">
+  <div class="card-meta">
+    <span class="channel-tag">@aigc1024</span>
+    <span class="time-tag">17:39</span>
+  </div>
+  <div class="card-title"><a href="https://t.me/aigc1024/21217)" target="_blank">hub.com/rohitg00/agentmemory</a></div>
+  <div class="card-summary"><p>说句实在，Agent、CLI、Memory、Skills 这四块现在已经是标配了，不是将来，就是现在。谁先把这套基础设施吃透，下一波 AI 生产力爆发的时候，你就是那个早已准备好的人。</p>
+<hr /></div>
+  <div class="card-footer"><a class="source-link" href="https://t.me/aigc1024/21217)" target="_blank">查看原文</a><div class="channel-links"><a href="https://t.me/aigc1024">AI探索</a><a href="https://t.me/openclaw1024">Hermes/OpenClaw</a><a href="https://t.me/meiriyishu">优质资源</a><a href="https://t.me/chunse1024/8467">优质信息</a><a href="https://t.me/aigc1024/21217">查看原文</a></div></div>
+</div>
+<div class="card">
+  <div class="card-meta">
+    <span class="channel-tag">@text1024</span>
+    <span class="time-tag">18:26</span>
+  </div>
+  <div class="card-title"><a href="https://t.me/text1024/23575)" target="_blank">如果你想做 YouTuber，这是我做了7年，踩坑无数后总结的 4 个阶段（特指长视频频道）：</a></div>
+  <div class="card-summary"><p>1️⃣ 起量期</p>
+<p>前期只做一件事：稳定更新。</p>
+<p>日更 / 隔日更 + 不选太冷的赛道，</p>
+<p>大多数频道 3 个月左右都会被系统推一次，</p>
+<p>在之后的1–2 周内冲过 YPP（1k 粉 + 4k 小时）。</p>
+<p>2️⃣ 幻觉破灭期</p>
+<p>过了 YPP ≠ 被动收入开始。</p>
+<p>80% 的频道如果没有明确主、持续输出，</p>
+<p>流量会从日万 ➜ 日百，断崖式下跌。</p>
+<p>3️⃣ 稳定期</p>
+<p>你找到了能长期做的赛道。</p>
+<p>数据开始稳定在一个区间：</p>
+<p>上限 = 视频质量</p>
+<p>下限 = 更新频率</p>
+<p>4️⃣ 可预期阶段</p>
+<p>做视频前，你大概就知道它能跑到哪。</p>
+<p>选、开头、封面都被你量化了，</p>
+<p>按成熟模板做，数据不会偏离太多。</p>
+<p>这时，YouTube 才真正变成一门“可控的生意”。</p>
+<hr /></div>
+  <div class="card-footer"><a class="source-link" href="https://t.me/text1024/23575)" target="_blank">查看原文</a><div class="channel-links"><a href="https://t.me/text1024">副业搞钱</a><a href="https://t.me/yunying23">出海赚美金</a><a href="https://t.me/inside1024">内幕消息</a><a href="https://t.me/chunse1024">优质内容</a><a href="https://t.me/text1024/23575">查看原文</a></div></div>
+</div>
+<div class="card">
+  <div class="card-meta">
+    <span class="channel-tag">@aigc1024</span>
+    <span class="time-tag">23:22</span>
+  </div>
+  <div class="card-title"><a href="https://t.me/aigc1024/21226)" target="_blank">Claude Code、OpenClaw、Hermes、Codex，一个比一个能干， 但 2026 年了，这批最先进的 Agent 还集体卡在同一件小事上：</a></div>
+  <div class="card-summary"><p>上不了网，查要付费 API，读小红书卡登录，上 Reddit 动不动被封 IP。</p>
+<p>一个叫 Agent Reach 的开源项目，把这三堵墙一起拆了， 26.4k stars，基本零 API 费用。</p>
+<p>它聪明在没造轮子： yt-dlp、gh CLI 这些本来就成熟的工具，它统一管起来， Claude Code / Cursor / OpenClaw 要用的时候自动调用， 本质上是给你的 Agent 装了一双能看全网的眼睛。</p>
+<p>安装是真的只要一句， 把 install 链接丢给你的 Agent， 它自己装依赖、自己注册 skill、自己告诉你哪些平台还差个 Cookie， 装完跑一遍 agent-reach doctor，哪通哪不通、怎么修，一目了然。</p>
+<p>开箱即用的：YouTube、GitHub、网页、B站、V2EX，零配置。 要配 Cookie 的：Twitter、小红书、Reddit、雪球，流程统一，Agent 会带着你做。</p>
+<p>三盆冷水也先泼了：</p>
+<p>1️⃣Cookie 会过期，得手动重新导出，不存在装完就一劳永逸；</p>
+<p>2️⃣拿 Cookie 抓数据有封号风险，社区共识是用小号，别赌主力号；</p>
+<p>3️⃣ 纯聊天用户别凑热闹，它只对会让 Agent 跑命令的人有价值。</p>
+<p>但有一点让我觉得这项目能活很久：</p>
+<p>作者几乎每天都在更新，而且自己天天在用， 毕竟开源项目最硬的指标从来不是 star 数， 关键看作者还在不在用自己的东西。</p>
+<p>链接放一楼了，让你的 Agent 自己装自己👇</p>
+<hr /></div>
+  <div class="card-footer"><a class="source-link" href="https://t.me/aigc1024/21226)" target="_blank">查看原文</a><div class="channel-links"><a href="https://t.me/aigc1024">AI探索</a><a href="https://t.me/openclaw1024">Hermes/OpenClaw</a><a href="https://t.me/meiriyishu">优质资源</a><a href="https://t.me/chunse1024/8467">优质信息</a><a href="https://t.me/aigc1024/21226">查看原文</a></div></div>
+</div></div>
+
+    <div class="footer">TG 频道日报 · 自动生成</div>
+</div>
+
+</body>
+</html>
